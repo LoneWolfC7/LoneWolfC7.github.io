@@ -271,10 +271,10 @@ diff求和——&gt;a 求和——&gt;prefix</p>
 <p>前缀和可用于求指定区间的和</p>
 <ol>
 <li><strong>求出前缀和数组</strong><br>
-前缀和数组的计算:prefix[i]=prefix[i-1]+arr[i] (此处及下文写法i均从1开始)</li>
+前缀和数组的计算:prefix[i] = prefix[i-1] + arr[i] (此处及下文写法i均从1开始，以防止越界问题)</li>
 <li><strong>得出区间和</strong><br>
-由前缀和的可加性:sum[1,k]+sum[k+1,n]=sum[1,n]<br>
-得到sum[l,r]=sum[1,r]-sum[1,l-1]，即sum=prefix[r]-prefix[l-1]</li>
+由前缀和的可加性:sum[1,k] + sum[k+1,n] = sum[1,n]<br>
+得到sum[l,r] = sum[1,r] - sum[1,l-1]，即sum=prefix[r]-prefix[l-1]</li>
 </ol>
 <h2 id="差分">差分</h2>
 <p>差分可用于修改指定区间的值</p>
@@ -285,11 +285,36 @@ diff[i] = a[i] - a[i-1]，它具有两个性质，一是可以通过求和得到
 diff[l] += x;<br>
 diff[r + 1] -= x;</li>
 <li><strong>求出diff的前缀和数组，得到修改后的数组</strong><br>
-a[i]=a[i-1]+diff[i]</li>
+a[i] = a[i-1] + diff[i]</li>
 </ol>
 <hr>
 <h1>二维前缀和与差分</h1>
+<p>利用数形结合，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
 <h2 id="前缀和-v2">前缀和</h2>
+<ol>
+<li><strong>求出前缀和数组</strong><br>
+prefix[i][j] = prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1]</li>
+<li><strong>得出区间和</strong><br>
+对于指定区间，设左上角为x1,y1，右下角为x2,y2<br>
+sum = p[x2][y2] - p[x2][y1-1] - p[x1-1][y2] + p[x1-1][y1-1]</li>
+</ol>
+<h2 id="差分-v2">差分</h2>
+<ol>
+<li><strong>求出差分数组</strong><br>
+d[i][j] = a[i][j] - a[i][j-1] - a[i-1][j] + a[i-1][j-1]<br>
+or<br>
+{d[i][j] += a[i][j];<br>
+d[i + 1][j] -= a[i][j];<br>
+d[i][j + 1] -= a[i][j];<br>
+d[i + 1][j + 1] += a[i][j];}</li>
+<li><strong>对指定区间[(x1,y1),(x2,y2)]的值进行修改</strong><br>
+d[x1][y1] += c;<br>
+d[x2 + 1][y1] -= c;<br>
+d[x1][y2 + 1] -= c;<br>
+d[x2 + 1][y2 + 1] += c;</li>
+<li><strong>求出diff的前缀和数组，得到修改后的数组</strong><br>
+a[i][j] = a[i - 1][j] + a[i][j - 1] - a[i - 1][j - 1] + d[i][j];</li>
+</ol>
 <hr>
 ]]></content>
       <tags>

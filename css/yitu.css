@@ -805,26 +805,26 @@ h6::before {
     background: #212121;
 }
 
-/*宽屏适配 start*/
+/* 宽屏适配 start*/
 /* 全局宽度 */
-.layout {
+/* .layout {
     max-width: 1400px;
 }
 
 /* 侧边卡片栏宽度 */
-.aside-content {
+/* .aside-content {
     max-width: 318px;
     min-width: 300px;
-}
+} */
 
 /* 平板尺寸自适应(不启用侧边栏宽度限制) */
-@media screen and (max-width: 900px) {
+/* @media screen and (max-width: 900px) {
     .aside-content {
         max-width: none !important;
         padding: 0 5px 0 5px;
     }
-}
-/*宽屏适配 end*/
+} */ 
+/*宽屏适配 end */
 
 .card-info-avatar .author-status-box {
     position: absolute;
