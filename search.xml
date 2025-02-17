@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>单调栈与单调队列</title>
+    <url>/2025/02/12/%E5%8D%95%E8%B0%83%E6%A0%88%E4%B8%8E%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</url>
+    <content><![CDATA[<p>单调栈与单调队列一般存在以下三种形式：存值，存下标，数组实现，数组实现的优点在于在清空栈时只需top=0即可</p>
+<h1>单调栈</h1>
+<p>伪代码：</p>
+<p>for(i=1-&gt;n)//n为元素数量</p>
+<p>{</p>
+<pre><code>while(栈非空且入栈元素优于栈顶元素)栈顶出栈//维持栈的单调性
+
+//while结束的两种可能的判断
+如果(栈顶元素优于入栈元素)更新一次答案，此时栈顶即为最优解
+否则 不存在答案
+将新元素入栈
+</code></pre>
+<p>}</p>
+<p><strong>eg:输入n个数字 输出每个数字左侧距离该数字最近的比它小的元素，不存在则输出-1</strong><br>
+in      5<br>
+7 8 5 6 7<br>
+out     -1 7 -1 5 6</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//存值</span></span><br><span class="line"><span class="type">int</span> a[N],ans[N];<span class="comment">//a[N]用来存放输入的数字，ans[N]用于存放答案</span></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; stk;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(stk.<span class="built_in">size</span>()&amp;&amp;stk.top&gt;=a[i])stk.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="keyword">if</span>(stk.<span class="built_in">empty</span>())ans[i]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> ans[i]=stk.<span class="built_in">top</span>();</span><br><span class="line">    stk.<span class="built_in">push</span>(a[i]);</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;   </span><br><span class="line"><span class="comment">//存下标＋数组实现</span></span><br><span class="line"><span class="type">int</span> a[N],stk[N],ans[N],top;<span class="comment">//stk数组用来模拟下标</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(top&amp;&amp;a[stk[top]]&gt;=a[i])top--;</span><br><span class="line">    <span class="keyword">if</span>(top) ans[i]=a[stk[top]];</span><br><span class="line">    <span class="keyword">else</span> ans[i]=<span class="number">-1</span>;</span><br><span class="line">    stk[++top]=i;</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1>单调队列</h1>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>图</title>
+    <url>/2025/02/12/%E5%9B%BE/</url>
+    <content><![CDATA[<h1>基本介绍</h1>
+<p>图(G)是由顶点集(V)和边集(E)组成的有序对，G=(V,E)，可以用|V|，|E|表示图中的顶点数量和边数量<br>
+图既可以是有向的，即单向链接，也可以是无向的，即双向链接。<br>
+只包含有向边的图称为有向图，只包含无向边的图称为无向图<br>
+若边关联了权重/成本，则叫做权重图，反之叫做非权重图</p>
+<h1>图的属性</h1>
+<p>一条边的两个端点为同一个顶点，称为自环<br>
+同一条边出现了不止一次，称为多重边<br>
+不包含自环或多重边的图称为简单图</p>
+<ul>
+<li>边的数量<br>
+在一个简单图中，给定顶点的数量n(|V|=n)<br>
+有向图：0≤|E|≤n*(n-1)<br>
+无向图：0≤|E|≤n*(n-1)/2<br>
+若图中的边的数量接近最大的可能边数(顶点数量的平方)，则称这个图是稠密的。<br>
+若图中的边的数量接近顶点数量，则称这个图是稀疏的。<br>
+对图进行处理时，根据图的稠密/稀疏做出决策，如 使用邻接矩阵存储稠密的图，使用邻接表存储稀疏的图</li>
+<li>Path,Walk,Trail<br>
+简单路径(Path)：没有重复边/点的途径(Walk)<br>
+途径中的顶点可以重复但是边不能重复，则称为Trail</li>
+<li>链接<br>
+强链接：从任意顶点可以去到任意的其他顶点<br>
+若是一个无向图，直接称它为connected</li>
+<li>环<br>
+开始与结束为同一顶点且边数&gt;0</li>
+</ul>
+<h1>边列表</h1>
+]]></content>
+  </entry>
+  <entry>
+    <title>DFS与BFS</title>
+    <url>/2025/02/17/DFS%E4%B8%8EBFS/</url>
+    <content><![CDATA[<h1>树的遍历</h1>
+<pre><code class="language-C++"></code></pre>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>面向竞赛的C++STL</title>
     <url>/2025/01/25/Basic-STL/</url>
     <content><![CDATA[<h1>面向竞赛的 C++ STL 介绍</h1>
@@ -111,9 +181,28 @@
 <hr>
 ]]></content>
       <tags>
-        <tag>C++</tag>
         <tag>算法</tag>
+        <tag>C++</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/01/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
   <entry>
     <title>Markdown基操</title>
@@ -242,25 +331,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/01/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>前缀和与差分</title>
     <url>/2025/02/05/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/</url>
     <content><![CDATA[<p>要对原数组a[N]进行修改与查询，需要用到前缀和数组和差分数组<br>
@@ -270,51 +340,52 @@ diff求和——&gt;a 求和——&gt;prefix</p>
 <h2 id="前缀和">前缀和</h2>
 <p>前缀和可用于求指定区间的和</p>
 <ol>
-<li><strong>求出前缀和数组</strong><br>
-前缀和数组的计算:prefix[i] = prefix[i-1] + arr[i] (此处及下文写法i均从1开始，以防止越界问题)</li>
-<li><strong>得出区间和</strong><br>
-由前缀和的可加性:sum[1,k] + sum[k+1,n] = sum[1,n]<br>
-得到sum[l,r] = sum[1,r] - sum[1,l-1]，即sum=prefix[r]-prefix[l-1]</li>
+<li><strong>求出前缀和数组</strong></li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">前缀和数组的计算:prefix[i] = prefix[i<span class="number">-1</span>] + arr[i] (此处及下文写法i均从<span class="number">1</span>开始，以防止越界问题)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>得出区间和</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">由前缀和的可加性:sum[<span class="number">1</span>,k] + sum[k<span class="number">+1</span>,n] = sum[<span class="number">1</span>,n]</span><br><span class="line">得到sum[l,r] = sum[<span class="number">1</span>,r] - sum[<span class="number">1</span>,l<span class="number">-1</span>]，即sum=prefix[r]-prefix[l<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
 <h2 id="差分">差分</h2>
 <p>差分可用于修改指定区间的值</p>
 <ol>
-<li><strong>求出差分数组</strong><br>
-diff[i] = a[i] - a[i-1]，它具有两个性质，一是可以通过求和得到a[i]，二是可以对后缀区间进行修改</li>
-<li><strong>对指定区间[l,r]的值进行修改</strong><br>
-diff[l] += x;<br>
-diff[r + 1] -= x;</li>
-<li><strong>求出diff的前缀和数组，得到修改后的数组</strong><br>
-a[i] = a[i-1] + diff[i]</li>
+<li><strong>求出差分数组</strong></li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[i] = a[i] - a[i<span class="number">-1</span>]，它具有两个性质，一是可以通过求和得到a[i]，二是可以对后缀区间进行修改</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>对指定区间[l,r]的值进行修改</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[l] += x;</span><br><span class="line">diff[r + <span class="number">1</span>] -= x;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[i] = a[i<span class="number">-1</span>] + diff[i]</span><br></pre></td></tr></table></figure>
 <hr>
 <h1>二维前缀和与差分</h1>
 <p>利用数形结合，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
 <h2 id="前缀和-v2">前缀和</h2>
 <ol>
-<li><strong>求出前缀和数组</strong><br>
-prefix[i][j] = prefix[i-1][j] + prefix[i][j-1] - prefix[i-1][j-1]</li>
-<li><strong>得出区间和</strong><br>
-对于指定区间，设左上角为x1,y1，右下角为x2,y2<br>
-sum = p[x2][y2] - p[x2][y1-1] - p[x1-1][y2] + p[x1-1][y1-1]</li>
+<li><strong>求出前缀和数组</strong></li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        prefix[i][j] = prefix[i<span class="number">-1</span>][j] + prefix[i][j<span class="number">-1</span>] - prefix[i<span class="number">-1</span>][j<span class="number">-1</span>] + arr[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>得出区间和</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">对于指定区间，设左上角为(x1, y1)，右下角为(x2, y2)</span><br><span class="line">sum = prefix[x2][y2] - prefix[x2][y1<span class="number">-1</span>] - prefix[x1<span class="number">-1</span>][y2] + prefix[x1<span class="number">-1</span>][y1<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
 <h2 id="差分-v2">差分</h2>
 <ol>
-<li><strong>求出差分数组</strong><br>
-d[i][j] = a[i][j] - a[i][j-1] - a[i-1][j] + a[i-1][j-1]<br>
-or<br>
-{d[i][j] += a[i][j];<br>
-d[i + 1][j] -= a[i][j];<br>
-d[i][j + 1] -= a[i][j];<br>
-d[i + 1][j + 1] += a[i][j];}</li>
-<li><strong>对指定区间[(x1,y1),(x2,y2)]的值进行修改</strong><br>
-d[x1][y1] += c;<br>
-d[x2 + 1][y1] -= c;<br>
-d[x1][y2 + 1] -= c;<br>
-d[x2 + 1][y2 + 1] += c;</li>
-<li><strong>求出diff的前缀和数组，得到修改后的数组</strong><br>
-a[i][j] = a[i - 1][j] + a[i][j - 1] - a[i - 1][j - 1] + d[i][j];</li>
+<li><strong>求出差分数组</strong></li>
 </ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        d[i][j] = arr[i][j] - arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j] + arr[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">&#123;d[i][j] += a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j] -= a[i][j];</span><br><span class="line">d[i][j + <span class="number">1</span>] -= a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j + <span class="number">1</span>] += a[i][j];&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>对指定区间[(x1,y1),(x2,y2)]的值进行修改</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">d[x1][y1] += c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">d[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        arr[i][j] = arr[i<span class="number">-1</span>][j] + arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j<span class="number">-1</span>] + d[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 ]]></content>
       <tags>
