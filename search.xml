@@ -6,16 +6,7 @@
     <content><![CDATA[<p>单调栈与单调队列一般存在以下三种形式：存值，存下标，数组实现，数组实现的优点在于在清空栈时只需top=0即可</p>
 <h1>单调栈</h1>
 <p>伪代码：</p>
-<p>for(i=1-&gt;n)//n为元素数量</p>
-<p>{</p>
-<pre><code>while(栈非空且入栈元素优于栈顶元素)栈顶出栈//维持栈的单调性
-
-//while结束的两种可能的判断
-如果(栈顶元素优于入栈元素)更新一次答案，此时栈顶即为最优解
-否则 不存在答案
-将新元素入栈
-</code></pre>
-<p>}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for(i=1-&gt;n)//n为元素数量</span><br><span class="line">&#123;</span><br><span class="line">    ① while(栈非空且入栈元素优于栈顶元素)栈顶出栈//维持栈的单调性</span><br><span class="line">    //while结束的两种可能的判断</span><br><span class="line">    ② 如果(栈顶元素优于入栈元素)更新一次答案，此时栈顶即为最优解</span><br><span class="line">    否则 不存在答案</span><br><span class="line">    ③ 将新元素入栈</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>eg:输入n个数字 输出每个数字左侧距离该数字最近的比它小的元素，不存在则输出-1</strong><br>
 in      5<br>
 7 8 5 6 7<br>
@@ -23,6 +14,12 @@ out     -1 7 -1 5 6</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//存值</span></span><br><span class="line"><span class="type">int</span> a[N],ans[N];<span class="comment">//a[N]用来存放输入的数字，ans[N]用于存放答案</span></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; stk;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(stk.<span class="built_in">size</span>()&amp;&amp;stk.top&gt;=a[i])stk.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="keyword">if</span>(stk.<span class="built_in">empty</span>())ans[i]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> ans[i]=stk.<span class="built_in">top</span>();</span><br><span class="line">    stk.<span class="built_in">push</span>(a[i]);</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;   </span><br><span class="line"><span class="comment">//存下标＋数组实现</span></span><br><span class="line"><span class="type">int</span> a[N],stk[N],ans[N],top;<span class="comment">//stk数组用来模拟下标</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(top&amp;&amp;a[stk[top]]&gt;=a[i])top--;</span><br><span class="line">    <span class="keyword">if</span>(top) ans[i]=a[stk[top]];</span><br><span class="line">    <span class="keyword">else</span> ans[i]=<span class="number">-1</span>;</span><br><span class="line">    stk[++top]=i;</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <h1>单调队列</h1>
+<p>通过deque实现，在队头进行出队操作，在队尾进行入队和出队操作，最典型的是用于处理滑动窗口<br>
+伪代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for(i=1-&gt;n)</span><br><span class="line">&#123;</span><br><span class="line">    ① while(非空且队头不合法)弹出头//队头合法性</span><br><span class="line">    while(非空且i优于队尾)弹出尾//队尾优越性</span><br><span class="line">    ② 将i入队</span><br><span class="line">    ③ 此时队头为最优</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.luogu.com.cn/problem/P1886"><em><strong>例题</strong></em></a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//deque存下标实现</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//滑动窗口的区间为[i-k+1,i]</span></span><br><span class="line">    <span class="keyword">while</span> (dq.<span class="built_in">size</span>() &amp;&amp; dq.<span class="built_in">front</span>() &lt; i - k + <span class="number">1</span>)dq.<span class="built_in">pop_front</span>();</span><br><span class="line">    <span class="keyword">while</span> (dq.<span class="built_in">size</span>() &amp;&amp; a[i]&lt;= a[dq.<span class="built_in">back</span>()])dq.<span class="built_in">pop_back</span>();</span><br><span class="line">    dq.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="comment">//当第一个滑动窗口开始形成时，开始输出答案</span></span><br><span class="line">    <span class="keyword">if</span> (i &gt;= k)cout &lt;&lt; a[dq.<span class="built_in">front</span>()] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#TODO 数组模拟</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
@@ -57,18 +54,11 @@ out     -1 7 -1 5 6</p>
 <li>环<br>
 开始与结束为同一顶点且边数&gt;0</li>
 </ul>
-<h1>边列表</h1>
+<h1>图的存储方式</h1>
+<p>图的存储方式分为邻接矩阵和邻接表。使用邻接矩阵，当结点数量较多时，比如有1e5个点，那么至少开1e10的数组。<br>
+相较之下，使用邻接表就更为方便。邻接表包括前向星和vector两种形式。使用vector变长数组支持排序。<br>
+用vector<int> g[N]来存图，g[i]表示i的所有出点编号。若有x-&gt;y，则g[x].push_back(y)</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>DFS与BFS</title>
-    <url>/2025/02/17/DFS%E4%B8%8EBFS/</url>
-    <content><![CDATA[<h1>树的遍历</h1>
-<pre><code class="language-C++"></code></pre>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
   </entry>
   <entry>
     <title>面向竞赛的C++STL</title>
@@ -186,23 +176,15 @@ out     -1 7 -1 5 6</p>
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/01/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>DFS与BFS</title>
+    <url>/2025/02/17/DFS%E4%B8%8EBFS/</url>
+    <content><![CDATA[<h1>模板</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> dep)</span><span class="comment">//dep代表递归层数或要填的第几个空</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(所有空都填完了)</span><br><span class="line">    &#123;</span><br><span class="line">        判断最优解/记录答案；</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(枚举这个空能填的选项)</span><br><span class="line">        <span class="keyword">if</span>(这个选项是合法的)</span><br><span class="line">        &#123;</span><br><span class="line">            记录下这个空（保存现场）;</span><br><span class="line">            <span class="built_in">dfs</span>(dep<span class="number">+1</span>);</span><br><span class="line">            取消这个空（恢复现场）;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(初始状态)<span class="comment">//将初始状态入队</span></span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(枚举所有可扩展状态)<span class="comment">//找到u的所有可达状态v</span></span><br><span class="line">            <span class="keyword">if</span>(是合法的)<span class="comment">//v需要满足某些条件，如未访问过、未在队内等</span></span><br><span class="line">                q.<span class="built_in">push</span>(v);<span class="comment">//入队（同时可能需要维护某些必要信息）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1>树的遍历</h1>
 ]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
   </entry>
   <entry>
     <title>Markdown基操</title>
@@ -210,7 +192,8 @@ out     -1 7 -1 5 6</p>
     <content><![CDATA[<p>pr一点markdown教程，学会用笔才能写好字，把文章写漂亮<br>
 <a href="https://www.markdown.cn/">本文pr来源</a><br>
 <a href="https://blog.csdn.net/qq_40896997/article/details/106551767">emoji</a>😊<br>
-<a href="https://blog.csdn.net/wzk4869/article/details/126863936">数学表达式</a></p>
+<a href="https://blog.csdn.net/wzk4869/article/details/126863936">数学表达式</a><br>
+<a href="https://blog.csdn.net/weixin_51146207/article/details/137903410?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-137903410-blog-128811523.235%5Ev43%5Epc_blog_bottom_relevance_base7&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=3">vscode里的markdown</a></p>
 <h1>Markdown 语法速查表</h1>
 <p>Markdown 语法参考手册 / 速查表。</p>
 <h2 id="总览">总览</h2>
@@ -331,6 +314,52 @@ out     -1 7 -1 5 6</p>
       </tags>
   </entry>
   <entry>
+    <title>离散化与树状数组</title>
+    <url>/2025/02/21/%E7%A6%BB%E6%95%A3%E5%8C%96%E4%B8%8E%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h1>离散化</h1>
+<p>特征：操作次数不多，相关点不多</p>
+<ul>
+<li>离线与在线<br>
+离线：先存操作/询问后执行操作<br>
+在线：输入一次数据执行一次操作</li>
+</ul>
+<ol>
+<li>找出相关点并存下/收集所有需要离散化的值</li>
+<li>将相关点排序并去重</li>
+<li>大点(小点)到小点(大点)的映射<br>
+通过二分实现大点映射到小点（根据值找位置-&gt;二分），通过离散化数组实现小点映射到大点</li>
+<li>将操作全部转化为小点上</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*输入：</span></span><br><span class="line"><span class="comment">n 个添加操作，每个操作包含一个坐标 x 和一个权重 w。</span></span><br><span class="line"><span class="comment">q 个查询操作，每个查询包含一个区间 [l, r]。</span></span><br><span class="line"><span class="comment">目标：</span></span><br><span class="line"><span class="comment">对每个查询，计算区间 [l, r] 内所有 x 的权重和。*/</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">3e5</span> + <span class="number">9</span>;</span><br><span class="line"><span class="keyword">using</span> ll = <span class="type">long</span> <span class="type">long</span>;</span><br><span class="line"><span class="type">int</span> a[N];</span><br><span class="line">vector&lt;<span class="type">int</span>&gt; LS;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">op</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> a, b;</span><br><span class="line">&#125; add[N], que[N];</span><br><span class="line"><span class="comment">//离散化映射</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">getindex</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">lower_bound</span>(LS.<span class="built_in">begin</span>(), LS.<span class="built_in">end</span>(), x) - LS.<span class="built_in">begin</span>() + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> n, q;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; q;</span><br><span class="line">    <span class="comment">//找出相关点并存下/收集所有需要离散化的值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> w, x;</span><br><span class="line">        cin &gt;&gt; w &gt;&gt; x;</span><br><span class="line">        LS.<span class="built_in">push_back</span>(w);</span><br><span class="line">        add[i] = &#123;w, x&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= q;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l, r;</span><br><span class="line">        cin &gt;&gt; l &gt;&gt; r;</span><br><span class="line">        LS.<span class="built_in">push_back</span>(l), LS.<span class="built_in">push_back</span>(r);</span><br><span class="line">        que[i] = &#123;l, r&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//排序和去重</span></span><br><span class="line">    <span class="built_in">sort</span>(LS.<span class="built_in">begin</span>(), LS.<span class="built_in">end</span>());</span><br><span class="line">    LS.<span class="built_in">erase</span>(<span class="built_in">unique</span>(LS.<span class="built_in">begin</span>(), LS.<span class="built_in">end</span>()), LS.<span class="built_in">end</span>());</span><br><span class="line">    <span class="comment">//将操作全部转化为小点上</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</span><br><span class="line">        a[<span class="built_in">getindex</span>(add[i].a)] += add[i].b;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>;i&lt;=LS.<span class="built_in">size</span>();i++)</span><br><span class="line">        a[i] += a[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= q;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> l = <span class="built_in">getindex</span>(que[i].a), r = <span class="built_in">getindex</span>(que[i].b);</span><br><span class="line">        cout &lt;&lt; a[r] - a[l - <span class="number">1</span>]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1>树状数组</h1>
+<p>lowbit()的实现，树状数组的初始化</p>
+<h2 id="单点修改">单点修改</h2>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/01/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>前缀和与差分</title>
     <url>/2025/02/05/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/</url>
     <content><![CDATA[<p>要对原数组a[N]进行修改与查询，需要用到前缀和数组和差分数组<br>
@@ -363,7 +392,7 @@ diff求和——&gt;a 求和——&gt;prefix</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[i] = a[i<span class="number">-1</span>] + diff[i]</span><br></pre></td></tr></table></figure>
 <hr>
 <h1>二维前缀和与差分</h1>
-<p>利用数形结合，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
+<p><strong>利用数形结合</strong>，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
 <h2 id="前缀和-v2">前缀和</h2>
 <ol>
 <li><strong>求出前缀和数组</strong></li>
