@@ -1,45 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>图</title>
-    <url>/2025/02/12/%E5%9B%BE/</url>
-    <content><![CDATA[<h1>基本介绍</h1>
-<p>图(G)是由顶点集(V)和边集(E)组成的有序对，G=(V,E)，可以用|V|，|E|表示图中的顶点数量和边数量<br>
-图既可以是有向的，即单向链接，也可以是无向的，即双向链接。<br>
-只包含有向边的图称为有向图，只包含无向边的图称为无向图<br>
-若边关联了权重/成本，则叫做权重图，反之叫做非权重图</p>
-<h1>图的属性</h1>
-<p>一条边的两个端点为同一个顶点，称为自环<br>
-同一条边出现了不止一次，称为多重边<br>
-不包含自环或多重边的图称为简单图</p>
-<ul>
-<li>边的数量<br>
-在一个简单图中，给定顶点的数量n(|V|=n)<br>
-有向图：0≤|E|≤n*(n-1)<br>
-无向图：0≤|E|≤n*(n-1)/2<br>
-若图中的边的数量接近最大的可能边数(顶点数量的平方)，则称这个图是稠密的。<br>
-若图中的边的数量接近顶点数量，则称这个图是稀疏的。<br>
-对图进行处理时，根据图的稠密/稀疏做出决策，如 使用邻接矩阵存储稠密的图，使用邻接表存储稀疏的图</li>
-<li>Path,Walk,Trail<br>
-简单路径(Path)：没有重复边/点的途径(Walk)<br>
-途径中的顶点可以重复但是边不能重复，则称为Trail</li>
-<li>链接<br>
-强链接：从任意顶点可以去到任意的其他顶点<br>
-若是一个无向图，直接称它为connected</li>
-<li>环<br>
-开始与结束为同一顶点且边数&gt;0</li>
-</ul>
-<h1>图的存储方式</h1>
-<p>图的存储方式分为邻接矩阵和邻接表。使用邻接矩阵，当结点数量较多时，比如有1e5个点，那么至少开1e10的数组。<br>
-相较之下，使用邻接表就更为方便。邻接表包括前向星和vector两种形式。使用vector变长数组支持排序。<br>
-用vector<int> g[N]来存图，g[i]表示i的所有出点编号。若有x-&gt;y，则g[x].push_back(y)</p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>DFS与BFS</title>
     <url>/2025/02/17/DFS%E4%B8%8EBFS/</url>
     <content><![CDATA[<h1>模板</h1>
@@ -103,35 +64,42 @@ out     -1 7 -1 5 6</p>
       </tags>
   </entry>
   <entry>
-    <title>刷题记录</title>
-    <url>/2025/05/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<ul>
-<li>B3631 单向链表</li>
-</ul>
-<p>核心思想是通过值找到对应链表的位置，以达到O(1)的效果，通过哈希map&lt;int,Node*&gt;可以实现。</p>
+    <title>图</title>
+    <url>/2025/02/12/%E5%9B%BE/</url>
+    <content><![CDATA[<h1>基本介绍</h1>
+<p>图(G)是由顶点集(V)和边集(E)组成的有序对，G=(V,E)，可以用|V|，|E|表示图中的顶点数量和边数量<br>
+图既可以是有向的，即单向链接，也可以是无向的，即双向链接。<br>
+只包含有向边的图称为有向图，只包含无向边的图称为无向图<br>
+若边关联了权重/成本，则叫做权重图，反之叫做非权重图</p>
+<h1>图的属性</h1>
+<p>一条边的两个端点为同一个顶点，称为自环<br>
+同一条边出现了不止一次，称为多重边<br>
+不包含自环或多重边的图称为简单图</p>
 <ul>
-<li>P1165 日志分析</li>
+<li>边的数量<br>
+在一个简单图中，给定顶点的数量n(|V|=n)<br>
+有向图：0≤|E|≤n*(n-1)<br>
+无向图：0≤|E|≤n*(n-1)/2<br>
+若图中的边的数量接近最大的可能边数(顶点数量的平方)，则称这个图是稠密的。<br>
+若图中的边的数量接近顶点数量，则称这个图是稀疏的。<br>
+对图进行处理时，根据图的稠密/稀疏做出决策，如 使用邻接矩阵存储稠密的图，使用邻接表存储稀疏的图</li>
+<li>Path,Walk,Trail<br>
+简单路径(Path)：没有重复边/点的途径(Walk)<br>
+途径中的顶点可以重复但是边不能重复，则称为Trail</li>
+<li>链接<br>
+强链接：从任意顶点可以去到任意的其他顶点<br>
+若是一个无向图，直接称它为connected</li>
+<li>环<br>
+开始与结束为同一顶点且边数&gt;0</li>
 </ul>
-<p>需要在线更新数组内的最大值，即插入一个最大值要能找到这个最大值，删除一个最大值要能找到第二个最大值，考虑用辅助栈（最大值栈）实现，栈顶持续维护最大值</p>
-<ul>
-<li>P2021 faebdc玩扑克</li>
-</ul>
-<p>按照规律环形构造数组，隔一个空位构造一个数</p>
-<ul>
-<li>P1217 回文指数</li>
-</ul>
-<p>埃式筛法+常规判断素数优化(i+=2)，除11外，位数为偶数的数字都不是质数</p>
-<ul>
-<li>P1320 压缩技术</li>
-</ul>
-<p>输入带回车的字符串时的做法</p>
-<ul>
-<li>P2669 金币</li>
-</ul>
-<p>1,2,2,3,3,3…数组的求和</p>
+<h1>图的存储方式</h1>
+<p>图的存储方式分为邻接矩阵和邻接表。使用邻接矩阵，当结点数量较多时，比如有1e5个点，那么至少开1e10的数组。<br>
+相较之下，使用邻接表就更为方便。邻接表包括前向星和vector两种形式。使用vector变长数组支持排序。<br>
+用vector<int> g[N]来存图，g[i]表示i的所有出点编号。若有x-&gt;y，则g[x].push_back(y)</p>
 ]]></content>
       <tags>
         <tag>算法</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -256,10 +224,43 @@ lowbit(x) = x &amp; (-x)<br>
 <p>下面呈现方法</p>
 <figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip install runcell</span><br></pre></td></tr></table></figure>
 <p>在查看(View)-右侧边栏(Right Sidebar)-show打开，用github/google登录即可</p>
-<p><img src="https://tc-new.z.wiki/autoupload/f/QnY0Qee_op0p7NZ_k6HdX87fcWI9_r053jZiVFXEDYayl5f0KlZfm6UsKj-HyTuv/20250815/3lMA/1920X881/jnb7trans.png" alt="效果图"></p>
+<h2 id="效果图"><img src="https://tc-new.z.wiki/autoupload/f/QnY0Qee_op0p7NZ_k6HdX87fcWI9_r053jZiVFXEDYayl5f0KlZfm6UsKj-HyTuv/20250815/3lMA/1920X881/jnb7trans.png" alt="效果图"></h2>
+<p>破案了，直接vscode+jupyter+copilot完事</p>
 ]]></content>
       <tags>
         <tag>Jupyter notebook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>刷题记录</title>
+    <url>/2025/05/29/%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<ul>
+<li>B3631 单向链表</li>
+</ul>
+<p>核心思想是通过值找到对应链表的位置，以达到O(1)的效果，通过哈希map&lt;int,Node*&gt;可以实现。</p>
+<ul>
+<li>P1165 日志分析</li>
+</ul>
+<p>需要在线更新数组内的最大值，即插入一个最大值要能找到这个最大值，删除一个最大值要能找到第二个最大值，考虑用辅助栈（最大值栈）实现，栈顶持续维护最大值</p>
+<ul>
+<li>P2021 faebdc玩扑克</li>
+</ul>
+<p>按照规律环形构造数组，隔一个空位构造一个数</p>
+<ul>
+<li>P1217 回文指数</li>
+</ul>
+<p>埃式筛法+常规判断素数优化(i+=2)，除11外，位数为偶数的数字都不是质数</p>
+<ul>
+<li>P1320 压缩技术</li>
+</ul>
+<p>输入带回车的字符串时的做法</p>
+<ul>
+<li>P2669 金币</li>
+</ul>
+<p>1,2,2,3,3,3…数组的求和</p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -275,10 +276,126 @@ lowbit(x) = x &amp; (-x)<br>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@echo off</span><br><span class="line">jupyter notebook %*</span><br></pre></td></tr></table></figure>
 <p>随后启动jupyter notebook时直接输入jnb即可。</p>
 <h1>原理</h1>
-<p>原理也很简单，执行bat里的命令时，默认会把要执行的命令显示到终端上，echo off 是取消命令的回显，@的作用是将echo off这行命令的回显也取消掉，%*是用来接受参数(jnb test.ipynb=jupyter notebook test.ipynb)，所以运行时会执行&quot;jupyter notebook %*&quot;的命令，等同于在终端上输入了jupyter notebook。</p>
+<h2 id="原理也很简单，执行bat里的命令时，默认会把要执行的命令显示到终端上，echo-off-是取消命令的回显，-的作用是将echo-off这行命令的回显也取消掉，-是用来接受参数-jnb-test-ipynb-jupyter-notebook-test-ipynb-，所以运行时会执行-jupyter-notebook-的命令，等同于在终端上输入了jupyter-notebook。">原理也很简单，执行bat里的命令时，默认会把要执行的命令显示到终端上，echo off 是取消命令的回显，@的作用是将echo off这行命令的回显也取消掉，%*是用来接受参数(jnb test.ipynb=jupyter notebook test.ipynb)，所以运行时会执行&quot;jupyter notebook %*&quot;的命令，等同于在终端上输入了jupyter notebook。</h2>
+<p>破案了，直接配vscode+jupyter更简单</p>
 ]]></content>
       <tags>
         <tag>Jupyter notebook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>面向竞赛的C++STL</title>
+    <url>/2025/01/25/Basic-STL/</url>
+    <content><![CDATA[<h1>面向竞赛的 C++ STL 介绍</h1>
+<p>参考链接：<br>
+<a href="https://space.bilibili.com/231911980/lists/4220963?type=season">https://space.bilibili.com/231911980/lists/4220963?type=season</a><br>
+<a href="https://space.bilibili.com/498363953/lists/241249?type=season">https://space.bilibili.com/498363953/lists/241249?type=season</a><br>
+<a href="https://blog.csdn.net/weixin_51797626/article/details/123317216?spm=1001.2014.3001.5501">https://blog.csdn.net/weixin_51797626/article/details/123317216?spm=1001.2014.3001.5501</a></p>
+<h2 id="vector">vector</h2>
+<p><strong>涉及函数:at,back,push_back,pop_back,size,erase,clear,begin,rbegin,end,resize</strong></p>
+<ul>
+<li>创建数组</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v<span class="comment">//创建int类型的空数组v</span></span><br><span class="line">v.<span class="built_in">resize</span>(n)<span class="comment">//创建后可随时自定义大小</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">10</span>)</span><span class="comment">//创建int类型的数组v，包含10个元素，所有元素默认初始化为0</span></span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">10</span>,<span class="number">66</span>)</span><span class="comment">//创建int类型的数组v，包含10个元素，所有元素默认初始化为66</span></span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; v</span>=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;<span class="comment">//通过列表初始化创建</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>访问元素</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x=v[<span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> y=v.<span class="built_in">at</span>(<span class="number">1</span>);<span class="comment">//会进行边界检查，可以防止越界</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>修改元素</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">v[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">v.<span class="built_in">push_back</span>(<span class="number">1</span>);<span class="comment">//在数组最后添加元素1</span></span><br><span class="line">v.<span class="built_in">pop_back</span>();<span class="comment">//删除数组最后一个元素</span></span><br><span class="line">v.<span class="built_in">clear</span>();<span class="comment">//清空</span></span><br><span class="line">v.<span class="built_in">erase</span>(v.<span class="built_in">begin</span>()+n);<span class="comment">//删除第n+1个元素</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>遍历元素</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//常规</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;v.<span class="built_in">size</span>();i++)</span><br><span class="line">    cout&lt;&lt;v[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line"><span class="comment">//范围基</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> num:v)</span><br><span class="line">    cout&lt;&lt;num&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line"><span class="comment">//pair/结构体</span></span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; v_pair;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; [a.b]:v_pair)</span><br><span class="line">    cout&lt;&lt;a&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;b&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询大小</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> size=v.<span class="built_in">size</span>()<span class="comment">//返回unsigned int，&gt;=0</span></span><br><span class="line"><span class="keyword">if</span>(v.<span class="built_in">empty</span>())...<span class="comment">//检查v是否为空</span></span><br><span class="line"><span class="keyword">if</span>(v.<span class="built_in">size</span>())...<span class="comment">//检查v是否为空</span></span><br></pre></td></tr></table></figure>
+<h4 id="例题"><a href="https://www.starrycoding.com/problem/330">例题</a></h4>
+<hr>
+<h2 id="stack">stack</h2>
+<p><strong>涉及函数:push,top,pop,size,empty</strong><br>
+<strong>常用于:单调栈，括号匹配，dfs，tarjan 求强连通分量，波兰表达式(计算器)</strong></p>
+<ul>
+<li>初始化</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stack &lt;<span class="type">int</span>&gt; stk;<span class="comment">//栈不允许列表初始化和填充相同元素</span></span><br><span class="line">stack &lt;<span class="type">int</span>&gt; <span class="built_in">stk2</span>(stk);</span><br><span class="line">stack &lt;<span class="type">int</span>&gt; stk3=stk2;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>出入栈
+<blockquote>
+<p>如果你问一个人 push 的反义词是什么，如果 TA 说是 pop，那么 TA 一定是 c 艹选手</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stk.<span class="built_in">push</span>(<span class="number">10</span>);<span class="comment">//[10(top)]</span></span><br><span class="line">stk.<span class="built_in">push</span>(<span class="number">20</span>);<span class="comment">//[10,20(top)]</span></span><br><span class="line">stk.<span class="built_in">push</span>(<span class="number">50</span>);<span class="comment">//[10,20,50(top)]</span></span><br><span class="line">cout&lt;&lt;stk.<span class="built_in">top</span>()&lt;&lt;<span class="string">&#x27;\n&#x27;</span><span class="comment">//50,[10,,20,50(top)]</span></span><br><span class="line">stk.<span class="built_in">pop</span>()<span class="comment">//[10,20(top)],使用pop前判断非空</span></span><br><span class="line"><span class="keyword">if</span>(stk.<span class="built_in">size</span>())stk.<span class="built_in">pop</span>();</span><br><span class="line"><span class="keyword">if</span>(!stk.<span class="built_in">empty</span>())stk.pop;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>清空栈</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(stk.<span class="built_in">size</span>())stk.<span class="built_in">pop</span>();<span class="comment">//时间复杂度O(n)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>数组模拟</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//以下标1为栈底，变量top为栈顶</span></span><br><span class="line"><span class="type">int</span> stk[N],top=<span class="number">0</span>;</span><br><span class="line"><span class="comment">//入栈x</span></span><br><span class="line">stk[++top]=x;</span><br><span class="line"><span class="comment">//出栈</span></span><br><span class="line">top--;</span><br><span class="line"><span class="comment">//取出栈顶元素</span></span><br><span class="line">cout&lt;&lt;stk[top]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="comment">//获取大小</span></span><br><span class="line">cout&lt;&lt;top&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="comment">//判断是否为空</span></span><br><span class="line"><span class="keyword">if</span>(top)...</span><br><span class="line"><span class="comment">//遍历栈</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=top;i++)...</span><br></pre></td></tr></table></figure>
+<h4 id="例题-v2"><a href="https://www.starrycoding.com/problem/38">例题</a></h4>
+<ul>
+<li>也可用 vector,但 pop 时时间复杂度为 O(n)</li>
+</ul>
+<hr>
+<h2 id="队列">队列</h2>
+<h3 id="queue">queue</h3>
+<p><strong>涉及函数:push,pop,front,back,size,empty</strong><br>
+<strong>常用于:单调队列，模拟，约瑟夫环，bfs，分支限界搜索等</strong></p>
+<ul>
+<li>创建队列</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>出入队列</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">q.<span class="built_in">push</span>(<span class="number">10</span>);</span><br><span class="line">q.<span class="built_in">pop</span>(<span class="number">10</span>);<span class="comment">//使用pop前判断非空</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>访问元素</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">q.<span class="built_in">front</span>();</span><br><span class="line">q.<span class="built_in">back</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="例题-v3"><a href="https://www.starrycoding.com/problem/351">例题</a></h4>
+<ul>
+<li>检查队列大小/是否为空（同上）</li>
+</ul>
+<p><code>queue</code>和<code>stack</code>一样，不允许遍历</p>
+<ul>
+<li>数组模拟</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> q[N]<span class="comment">//N为push的最大次数</span></span><br><span class="line"><span class="type">int</span> qh=<span class="number">1</span>,qt=<span class="number">0</span>;<span class="comment">//q_head,q_tail;[qh,qt]为有效区间</span></span><br><span class="line">q[++qt]=x;<span class="comment">//入队</span></span><br><span class="line">qh++;<span class="comment">//出队</span></span><br><span class="line">qt-qh<span class="number">+1</span><span class="comment">//大小</span></span><br></pre></td></tr></table></figure>
+<h3 id="deque">deque</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//支持遍历，头尾均支持出入队</span></span><br><span class="line">deque&lt;<span class="type">int</span>&gt; dq;</span><br><span class="line">dq.<span class="built_in">push_front</span>(<span class="number">1</span>);</span><br><span class="line">dq.<span class="built_in">push_bacK</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">int</span> t = dq.<span class="built_in">front</span>();</span><br><span class="line">t = dq.<span class="built_in">back</span>();</span><br><span class="line">dq.<span class="built_in">size</span>();</span><br><span class="line">dq.<span class="built_in">empty</span>();</span><br><span class="line"><span class="comment">//弹出时先判断是否为空</span></span><br><span class="line">dq.<span class="built_in">pop_front</span>();</span><br><span class="line">dq.<span class="built_in">pop_back</span>();</span><br></pre></td></tr></table></figure>
+<h4 id="例题-v4"><a href="https://www.starrycoding.com/problem/357">例题</a></h4>
+<h3 id="priority-queue">priority_queue</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//用于每次提取队列种最大的元素或最小的元素</span></span><br><span class="line"><span class="comment">//自动排序内部数，小到大或大到小，不支持遍历</span></span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt;&gt; q1; </span><br><span class="line"><span class="comment">//greater是小根堆，用vector装载内部元素</span></span><br><span class="line">priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, less&lt;<span class="type">int</span>&gt;&gt; q2; </span><br><span class="line"><span class="comment">//less是大根堆</span></span><br><span class="line"></span><br><span class="line">q<span class="number">1.</span><span class="built_in">push</span>(<span class="number">3</span>), q<span class="number">2.</span><span class="built_in">push</span>(<span class="number">2</span>);</span><br><span class="line"><span class="type">int</span> t = q<span class="number">1.</span><span class="built_in">size</span>();</span><br><span class="line"><span class="keyword">while</span> (q<span class="number">1.</span><span class="built_in">size</span>())</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> t = q<span class="number">1.</span><span class="built_in">top</span>();<span class="comment">//小根堆所以取出的数是所有数内最小的</span></span><br><span class="line">	q<span class="number">1.</span><span class="built_in">pop</span>();</span><br><span class="line">	cout &lt;&lt; t &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例题-v5"><a href="https://www.starrycoding.com/problem/361">例题</a></h4>
+<hr>
+<h2 id="string">string</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> t=a.<span class="built_in">find</span>(<span class="string">&#x27;x&#x27;</span>);<span class="comment">//获取第一个字符x出现的位置的下标</span></span><br><span class="line">string g=a.<span class="built_in">substr</span>(<span class="number">0</span>,<span class="number">3</span>);<span class="comment">//从下标0开始(包括0)往后取三个字符</span></span><br><span class="line">stinrg g=a.<span class="built_in">substr</span>(<span class="number">3</span>)<span class="comment">//从下标3开始到结束</span></span><br></pre></td></tr></table></figure>
+<h2 id="algorithm">algorithm</h2>
+<h3 id="next-permutation-prev-permutation">next_permutation,prev_permutation</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//全排列函数</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> n, a[<span class="number">100</span>];</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        a[i] = i;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            cout &lt;&lt; a[i] &lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">while</span> (<span class="built_in">next_permutation</span>(<span class="number">1</span> + a, <span class="number">1</span> + a + n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="lower-bound">lower_bound</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//找大于等于某数的第一个数，查找的数组必须有序</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n = <span class="number">7</span>;<span class="comment">//7个数</span></span><br><span class="line"><span class="type">int</span> a[] = &#123; <span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">111</span> &#125;;</span><br><span class="line">	</span><br><span class="line"><span class="type">int</span> t = <span class="built_in">lower_bound</span>(a, a + n, <span class="number">8</span>) - a;<span class="comment">//查询范围：0 ~ 6。数组中大于等于8的第一个数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (t != n)<span class="comment">//找不到会返回边界a+n，即7</span></span><br><span class="line">	cout &lt;&lt; a[t] &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> b[] = &#123; <span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">111</span> &#125;;</span><br><span class="line">t = <span class="built_in">lower_bound</span>(b + <span class="number">1</span>, b + n + <span class="number">1</span>, <span class="number">8</span>) - b;<span class="comment">//查询范围：1~8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (t != n + <span class="number">1</span>)<span class="comment">//找不到会返回边界，边界是 8</span></span><br><span class="line">	cout &lt;&lt; b[t] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<h3 id="unique">unique</h3>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; vec = &#123; <span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">9</span> &#125;;</span><br><span class="line"><span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>());</span><br><span class="line">	</span><br><span class="line"><span class="comment">//unique本身的功能是将排序后的数组内的所有重复元素在 O(n) 时间内堆积到数组末端</span></span><br><span class="line"><span class="comment">//同时它会返回一个指针/下标（区别于你传入的是容器还是数组） —— 堆积的第一个重复元素的位置</span></span><br><span class="line">	</span><br><span class="line">vec.<span class="built_in">erase</span>(<span class="built_in">unique</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>()), vec.<span class="built_in">end</span>());</span><br><span class="line"><span class="comment">//我们再利用vector的区间删除功能就能完成去重的过程</span></span><br></pre></td></tr></table></figure>
+<h2 id="set-map">set,map</h2>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//可以自动排序去重</span></span><br><span class="line">set&lt;<span class="type">int</span>&gt; se;</span><br><span class="line"><span class="comment">//关键字 关键值</span></span><br><span class="line">map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;<span class="comment">//map相当于拥有了关键值的set</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//插入</span></span><br><span class="line">se.<span class="built_in">insert</span>(<span class="number">3</span>);<span class="comment">//插入一个 3 关键字</span></span><br><span class="line"></span><br><span class="line">mp.<span class="built_in">insert</span>(&#123; <span class="number">1</span>,<span class="number">2</span> &#125;);<span class="comment">//插入一个 1 关键字，并给这个关键字的关键值赋值 2</span></span><br><span class="line">mp.<span class="built_in">insert</span>(&#123; <span class="number">1</span>,<span class="number">1</span> &#125;);<span class="comment">//因为 1 关键字已经存在，所以把关键值修改成 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// mp.insert(&#123; 1,2 &#125;) 等价于</span></span><br><span class="line">mp[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">mp[<span class="number">1</span>] += <span class="number">2</span>;<span class="comment">//1 关键字的关键值 + 2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> j : se)cout &lt;&lt; j &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> j : mp)</span><br><span class="line">	cout &lt;&lt; j.first &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; j.second &lt;&lt; endl;<span class="comment">//两个值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//删除</span></span><br><span class="line">mp.<span class="built_in">erase</span>(<span class="number">3</span>); se.<span class="built_in">erase</span>(<span class="number">3</span>);<span class="comment">//删除关键字为 3 的元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果是遍历删除 map 内特定的第 K 个数，跟 vector 删除一样要注意指针衔接</span></span><br><span class="line"><span class="type">int</span> k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> it = mp.<span class="built_in">begin</span>(); it != mp.<span class="built_in">end</span>();k++) &#123;</span><br><span class="line">	<span class="keyword">if</span> (k == K)it = mp.<span class="built_in">erase</span>(it);</span><br><span class="line">	<span class="keyword">else</span> it++;</span><br><span class="line">&#125;<span class="comment">//迭代器方式</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> t = mp.<span class="built_in">count</span>(<span class="number">3</span>);<span class="comment">//返回指定元素出现的次数</span></span><br><span class="line">t = mp.<span class="built_in">size</span>();<span class="comment">//返回map中元素的个数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//查找</span></span><br><span class="line"><span class="keyword">auto</span> j = mp.<span class="built_in">find</span>(<span class="number">3</span>);<span class="comment">//查找 3 关键字在 map 内的下标</span></span><br><span class="line"><span class="comment">//如果不存在则 j == mp.end()</span></span><br><span class="line"><span class="keyword">if</span> (j != mp.<span class="built_in">end</span>())cout &lt;&lt; (*j).first;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> g = mp.<span class="built_in">lower_bound</span>(<span class="number">3</span>);<span class="comment">//查找 map 内第一个大于等于 3 的数的下标</span></span><br><span class="line"><span class="comment">//如果不存在则 g == mp.end()</span></span><br><span class="line"><span class="keyword">if</span> (g != mp.<span class="built_in">end</span>())cout &lt;&lt; (*g).first;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="pair">pair</h2>
+<p>一个变量携带两个值，可以映射数组中对应元素的下标</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; pii;</span><br><span class="line">cin &gt;&gt; pii.first &gt;&gt; pii.second;</span><br><span class="line">cout &lt;&lt; pii.first &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; pii.second;</span><br></pre></td></tr></table></figure>
+<h4 id="例题-v6"><a href="https://www.luogu.com.cn/problem/P1223#submit" title="排队接水">例题</a></h4>
+<hr>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
@@ -409,25 +526,6 @@ lowbit(x) = x &amp; (-x)<br>
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2025/01/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>前缀和与差分</title>
     <url>/2025/02/05/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/</url>
     <content><![CDATA[<p>要对原数组a[N]进行修改与查询，需要用到前缀和数组和差分数组<br>
@@ -490,118 +588,22 @@ diff求和——&gt;a 求和——&gt;prefix</p>
       </tags>
   </entry>
   <entry>
-    <title>面向竞赛的C++STL</title>
-    <url>/2025/01/25/Basic-STL/</url>
-    <content><![CDATA[<h1>面向竞赛的 C++ STL 介绍</h1>
-<p>参考链接：<br>
-<a href="https://space.bilibili.com/231911980/lists/4220963?type=season">https://space.bilibili.com/231911980/lists/4220963?type=season</a><br>
-<a href="https://space.bilibili.com/498363953/lists/241249?type=season">https://space.bilibili.com/498363953/lists/241249?type=season</a><br>
-<a href="https://blog.csdn.net/weixin_51797626/article/details/123317216?spm=1001.2014.3001.5501">https://blog.csdn.net/weixin_51797626/article/details/123317216?spm=1001.2014.3001.5501</a></p>
-<h2 id="vector">vector</h2>
-<p><strong>涉及函数:at,back,push_back,pop_back,size,erase,clear,begin,rbegin,end,resize</strong></p>
-<ul>
-<li>创建数组</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v<span class="comment">//创建int类型的空数组v</span></span><br><span class="line">v.<span class="built_in">resize</span>(n)<span class="comment">//创建后可随时自定义大小</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">10</span>)</span><span class="comment">//创建int类型的数组v，包含10个元素，所有元素默认初始化为0</span></span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v</span><span class="params">(<span class="number">10</span>,<span class="number">66</span>)</span><span class="comment">//创建int类型的数组v，包含10个元素，所有元素默认初始化为66</span></span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; v</span>=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>&#125;<span class="comment">//通过列表初始化创建</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>访问元素</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> x=v[<span class="number">1</span>];</span><br><span class="line"><span class="type">int</span> y=v.<span class="built_in">at</span>(<span class="number">1</span>);<span class="comment">//会进行边界检查，可以防止越界</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>修改元素</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">v[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">v.<span class="built_in">push_back</span>(<span class="number">1</span>);<span class="comment">//在数组最后添加元素1</span></span><br><span class="line">v.<span class="built_in">pop_back</span>();<span class="comment">//删除数组最后一个元素</span></span><br><span class="line">v.<span class="built_in">clear</span>();<span class="comment">//清空</span></span><br><span class="line">v.<span class="built_in">erase</span>(v.<span class="built_in">begin</span>()+n);<span class="comment">//删除第n+1个元素</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>遍历元素</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//常规</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;v.<span class="built_in">size</span>();i++)</span><br><span class="line">    cout&lt;&lt;v[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line"><span class="comment">//范围基</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> num:v)</span><br><span class="line">    cout&lt;&lt;num&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line"><span class="comment">//pair/结构体</span></span><br><span class="line">vector&lt;pair&lt;<span class="type">int</span>,<span class="type">int</span>&gt;&gt; v_pair;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; [a.b]:v_pair)</span><br><span class="line">    cout&lt;&lt;a&lt;&lt;<span class="string">&#x27; &#x27;</span>&lt;&lt;b&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>查询大小</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> size=v.<span class="built_in">size</span>()<span class="comment">//返回unsigned int，&gt;=0</span></span><br><span class="line"><span class="keyword">if</span>(v.<span class="built_in">empty</span>())...<span class="comment">//检查v是否为空</span></span><br><span class="line"><span class="keyword">if</span>(v.<span class="built_in">size</span>())...<span class="comment">//检查v是否为空</span></span><br></pre></td></tr></table></figure>
-<h4 id="例题"><a href="https://www.starrycoding.com/problem/330">例题</a></h4>
-<hr>
-<h2 id="stack">stack</h2>
-<p><strong>涉及函数:push,top,pop,size,empty</strong><br>
-<strong>常用于:单调栈，括号匹配，dfs，tarjan 求强连通分量，波兰表达式(计算器)</strong></p>
-<ul>
-<li>初始化</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stack &lt;<span class="type">int</span>&gt; stk;<span class="comment">//栈不允许列表初始化和填充相同元素</span></span><br><span class="line">stack &lt;<span class="type">int</span>&gt; <span class="built_in">stk2</span>(stk);</span><br><span class="line">stack &lt;<span class="type">int</span>&gt; stk3=stk2;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>出入栈
-<blockquote>
-<p>如果你问一个人 push 的反义词是什么，如果 TA 说是 pop，那么 TA 一定是 c 艹选手</p>
-</blockquote>
-</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">stk.<span class="built_in">push</span>(<span class="number">10</span>);<span class="comment">//[10(top)]</span></span><br><span class="line">stk.<span class="built_in">push</span>(<span class="number">20</span>);<span class="comment">//[10,20(top)]</span></span><br><span class="line">stk.<span class="built_in">push</span>(<span class="number">50</span>);<span class="comment">//[10,20,50(top)]</span></span><br><span class="line">cout&lt;&lt;stk.<span class="built_in">top</span>()&lt;&lt;<span class="string">&#x27;\n&#x27;</span><span class="comment">//50,[10,,20,50(top)]</span></span><br><span class="line">stk.<span class="built_in">pop</span>()<span class="comment">//[10,20(top)],使用pop前判断非空</span></span><br><span class="line"><span class="keyword">if</span>(stk.<span class="built_in">size</span>())stk.<span class="built_in">pop</span>();</span><br><span class="line"><span class="keyword">if</span>(!stk.<span class="built_in">empty</span>())stk.pop;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>清空栈</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span>(stk.<span class="built_in">size</span>())stk.<span class="built_in">pop</span>();<span class="comment">//时间复杂度O(n)</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>数组模拟</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//以下标1为栈底，变量top为栈顶</span></span><br><span class="line"><span class="type">int</span> stk[N],top=<span class="number">0</span>;</span><br><span class="line"><span class="comment">//入栈x</span></span><br><span class="line">stk[++top]=x;</span><br><span class="line"><span class="comment">//出栈</span></span><br><span class="line">top--;</span><br><span class="line"><span class="comment">//取出栈顶元素</span></span><br><span class="line">cout&lt;&lt;stk[top]&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="comment">//获取大小</span></span><br><span class="line">cout&lt;&lt;top&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="comment">//判断是否为空</span></span><br><span class="line"><span class="keyword">if</span>(top)...</span><br><span class="line"><span class="comment">//遍历栈</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=top;i++)...</span><br></pre></td></tr></table></figure>
-<h4 id="例题-v2"><a href="https://www.starrycoding.com/problem/38">例题</a></h4>
-<ul>
-<li>也可用 vector,但 pop 时时间复杂度为 O(n)</li>
-</ul>
-<hr>
-<h2 id="队列">队列</h2>
-<h3 id="queue">queue</h3>
-<p><strong>涉及函数:push,pop,front,back,size,empty</strong><br>
-<strong>常用于:单调队列，模拟，约瑟夫环，bfs，分支限界搜索等</strong></p>
-<ul>
-<li>创建队列</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">queue&lt;<span class="type">int</span>&gt; q;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>出入队列</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">q.<span class="built_in">push</span>(<span class="number">10</span>);</span><br><span class="line">q.<span class="built_in">pop</span>(<span class="number">10</span>);<span class="comment">//使用pop前判断非空</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>访问元素</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">q.<span class="built_in">front</span>();</span><br><span class="line">q.<span class="built_in">back</span>();</span><br></pre></td></tr></table></figure>
-<h4 id="例题-v3"><a href="https://www.starrycoding.com/problem/351">例题</a></h4>
-<ul>
-<li>检查队列大小/是否为空（同上）</li>
-</ul>
-<p><code>queue</code>和<code>stack</code>一样，不允许遍历</p>
-<ul>
-<li>数组模拟</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> q[N]<span class="comment">//N为push的最大次数</span></span><br><span class="line"><span class="type">int</span> qh=<span class="number">1</span>,qt=<span class="number">0</span>;<span class="comment">//q_head,q_tail;[qh,qt]为有效区间</span></span><br><span class="line">q[++qt]=x;<span class="comment">//入队</span></span><br><span class="line">qh++;<span class="comment">//出队</span></span><br><span class="line">qt-qh<span class="number">+1</span><span class="comment">//大小</span></span><br></pre></td></tr></table></figure>
-<h3 id="deque">deque</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//支持遍历，头尾均支持出入队</span></span><br><span class="line">deque&lt;<span class="type">int</span>&gt; dq;</span><br><span class="line">dq.<span class="built_in">push_front</span>(<span class="number">1</span>);</span><br><span class="line">dq.<span class="built_in">push_bacK</span>(<span class="number">1</span>);</span><br><span class="line"><span class="type">int</span> t = dq.<span class="built_in">front</span>();</span><br><span class="line">t = dq.<span class="built_in">back</span>();</span><br><span class="line">dq.<span class="built_in">size</span>();</span><br><span class="line">dq.<span class="built_in">empty</span>();</span><br><span class="line"><span class="comment">//弹出时先判断是否为空</span></span><br><span class="line">dq.<span class="built_in">pop_front</span>();</span><br><span class="line">dq.<span class="built_in">pop_back</span>();</span><br></pre></td></tr></table></figure>
-<h4 id="例题-v4"><a href="https://www.starrycoding.com/problem/357">例题</a></h4>
-<h3 id="priority-queue">priority_queue</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//用于每次提取队列种最大的元素或最小的元素</span></span><br><span class="line"><span class="comment">//自动排序内部数，小到大或大到小，不支持遍历</span></span><br><span class="line"></span><br><span class="line">priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, greater&lt;<span class="type">int</span>&gt;&gt; q1; </span><br><span class="line"><span class="comment">//greater是小根堆，用vector装载内部元素</span></span><br><span class="line">priority_queue&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;, less&lt;<span class="type">int</span>&gt;&gt; q2; </span><br><span class="line"><span class="comment">//less是大根堆</span></span><br><span class="line"></span><br><span class="line">q<span class="number">1.</span><span class="built_in">push</span>(<span class="number">3</span>), q<span class="number">2.</span><span class="built_in">push</span>(<span class="number">2</span>);</span><br><span class="line"><span class="type">int</span> t = q<span class="number">1.</span><span class="built_in">size</span>();</span><br><span class="line"><span class="keyword">while</span> (q<span class="number">1.</span><span class="built_in">size</span>())</span><br><span class="line">&#123;</span><br><span class="line">	<span class="type">int</span> t = q<span class="number">1.</span><span class="built_in">top</span>();<span class="comment">//小根堆所以取出的数是所有数内最小的</span></span><br><span class="line">	q<span class="number">1.</span><span class="built_in">pop</span>();</span><br><span class="line">	cout &lt;&lt; t &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="例题-v5"><a href="https://www.starrycoding.com/problem/361">例题</a></h4>
-<hr>
-<h2 id="string">string</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> t=a.<span class="built_in">find</span>(<span class="string">&#x27;x&#x27;</span>);<span class="comment">//获取第一个字符x出现的位置的下标</span></span><br><span class="line">string g=a.<span class="built_in">substr</span>(<span class="number">0</span>,<span class="number">3</span>);<span class="comment">//从下标0开始(包括0)往后取三个字符</span></span><br><span class="line">stinrg g=a.<span class="built_in">substr</span>(<span class="number">3</span>)<span class="comment">//从下标3开始到结束</span></span><br></pre></td></tr></table></figure>
-<h2 id="algorithm">algorithm</h2>
-<h3 id="next-permutation-prev-permutation">next_permutation,prev_permutation</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//全排列函数</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>), cin.<span class="built_in">tie</span>(<span class="number">0</span>), cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> n, a[<span class="number">100</span>];</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        a[i] = i;</span><br><span class="line">    <span class="keyword">do</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">            cout &lt;&lt; a[i] &lt;&lt;<span class="string">&quot; &quot;</span>;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125; <span class="keyword">while</span> (<span class="built_in">next_permutation</span>(<span class="number">1</span> + a, <span class="number">1</span> + a + n));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="lower-bound">lower_bound</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//找大于等于某数的第一个数，查找的数组必须有序</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> n = <span class="number">7</span>;<span class="comment">//7个数</span></span><br><span class="line"><span class="type">int</span> a[] = &#123; <span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">111</span> &#125;;</span><br><span class="line">	</span><br><span class="line"><span class="type">int</span> t = <span class="built_in">lower_bound</span>(a, a + n, <span class="number">8</span>) - a;<span class="comment">//查询范围：0 ~ 6。数组中大于等于8的第一个数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (t != n)<span class="comment">//找不到会返回边界a+n，即7</span></span><br><span class="line">	cout &lt;&lt; a[t] &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> b[] = &#123; <span class="number">0</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">12</span>,<span class="number">111</span> &#125;;</span><br><span class="line">t = <span class="built_in">lower_bound</span>(b + <span class="number">1</span>, b + n + <span class="number">1</span>, <span class="number">8</span>) - b;<span class="comment">//查询范围：1~8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (t != n + <span class="number">1</span>)<span class="comment">//找不到会返回边界，边界是 8</span></span><br><span class="line">	cout &lt;&lt; b[t] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-<h3 id="unique">unique</h3>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; vec = &#123; <span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">9</span> &#125;;</span><br><span class="line"><span class="built_in">sort</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>());</span><br><span class="line">	</span><br><span class="line"><span class="comment">//unique本身的功能是将排序后的数组内的所有重复元素在 O(n) 时间内堆积到数组末端</span></span><br><span class="line"><span class="comment">//同时它会返回一个指针/下标（区别于你传入的是容器还是数组） —— 堆积的第一个重复元素的位置</span></span><br><span class="line">	</span><br><span class="line">vec.<span class="built_in">erase</span>(<span class="built_in">unique</span>(vec.<span class="built_in">begin</span>(), vec.<span class="built_in">end</span>()), vec.<span class="built_in">end</span>());</span><br><span class="line"><span class="comment">//我们再利用vector的区间删除功能就能完成去重的过程</span></span><br></pre></td></tr></table></figure>
-<h2 id="set-map">set,map</h2>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//可以自动排序去重</span></span><br><span class="line">set&lt;<span class="type">int</span>&gt; se;</span><br><span class="line"><span class="comment">//关键字 关键值</span></span><br><span class="line">map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; mp;<span class="comment">//map相当于拥有了关键值的set</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//插入</span></span><br><span class="line">se.<span class="built_in">insert</span>(<span class="number">3</span>);<span class="comment">//插入一个 3 关键字</span></span><br><span class="line"></span><br><span class="line">mp.<span class="built_in">insert</span>(&#123; <span class="number">1</span>,<span class="number">2</span> &#125;);<span class="comment">//插入一个 1 关键字，并给这个关键字的关键值赋值 2</span></span><br><span class="line">mp.<span class="built_in">insert</span>(&#123; <span class="number">1</span>,<span class="number">1</span> &#125;);<span class="comment">//因为 1 关键字已经存在，所以把关键值修改成 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// mp.insert(&#123; 1,2 &#125;) 等价于</span></span><br><span class="line">mp[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">mp[<span class="number">1</span>] += <span class="number">2</span>;<span class="comment">//1 关键字的关键值 + 2</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> j : se)cout &lt;&lt; j &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> j : mp)</span><br><span class="line">	cout &lt;&lt; j.first &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; j.second &lt;&lt; endl;<span class="comment">//两个值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//删除</span></span><br><span class="line">mp.<span class="built_in">erase</span>(<span class="number">3</span>); se.<span class="built_in">erase</span>(<span class="number">3</span>);<span class="comment">//删除关键字为 3 的元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//如果是遍历删除 map 内特定的第 K 个数，跟 vector 删除一样要注意指针衔接</span></span><br><span class="line"><span class="type">int</span> k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> it = mp.<span class="built_in">begin</span>(); it != mp.<span class="built_in">end</span>();k++) &#123;</span><br><span class="line">	<span class="keyword">if</span> (k == K)it = mp.<span class="built_in">erase</span>(it);</span><br><span class="line">	<span class="keyword">else</span> it++;</span><br><span class="line">&#125;<span class="comment">//迭代器方式</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> t = mp.<span class="built_in">count</span>(<span class="number">3</span>);<span class="comment">//返回指定元素出现的次数</span></span><br><span class="line">t = mp.<span class="built_in">size</span>();<span class="comment">//返回map中元素的个数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//查找</span></span><br><span class="line"><span class="keyword">auto</span> j = mp.<span class="built_in">find</span>(<span class="number">3</span>);<span class="comment">//查找 3 关键字在 map 内的下标</span></span><br><span class="line"><span class="comment">//如果不存在则 j == mp.end()</span></span><br><span class="line"><span class="keyword">if</span> (j != mp.<span class="built_in">end</span>())cout &lt;&lt; (*j).first;</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> g = mp.<span class="built_in">lower_bound</span>(<span class="number">3</span>);<span class="comment">//查找 map 内第一个大于等于 3 的数的下标</span></span><br><span class="line"><span class="comment">//如果不存在则 g == mp.end()</span></span><br><span class="line"><span class="keyword">if</span> (g != mp.<span class="built_in">end</span>())cout &lt;&lt; (*g).first;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="pair">pair</h2>
-<p>一个变量携带两个值，可以映射数组中对应元素的下标</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; pii;</span><br><span class="line">cin &gt;&gt; pii.first &gt;&gt; pii.second;</span><br><span class="line">cout &lt;&lt; pii.first &lt;&lt; <span class="string">&#x27; &#x27;</span> &lt;&lt; pii.second;</span><br></pre></td></tr></table></figure>
-<h4 id="例题-v6"><a href="https://www.luogu.com.cn/problem/P1223#submit" title="排队接水">例题</a></h4>
-<hr>
+    <title>Hello World</title>
+    <url>/2025/01/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-      <tags>
-        <tag>算法</tag>
-        <tag>C++</tag>
-      </tags>
   </entry>
 </search>
