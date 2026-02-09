@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>单调栈与单调队列</title>
-    <url>/2025/02/12/%E5%8D%95%E8%B0%83%E6%A0%88%E4%B8%8E%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</url>
+    <url>//2025/02/12/monotone-stack-and-queue/</url>
     <content><![CDATA[<p>单调栈与单调队列一般存在以下三种形式：存值，存下标，数组实现，数组实现的优点在于在清空栈时只需top=0即可</p>
 <h1>单调栈</h1>
 <p>伪代码：</p>
@@ -27,7 +27,7 @@ out     -1 7 -1 5 6</p>
   </entry>
   <entry>
     <title>图</title>
-    <url>/2025/02/12/%E5%9B%BE/</url>
+    <url>//2025/02/12/graph/</url>
     <content><![CDATA[<h1>基本介绍</h1>
 <p>图(G)是由顶点集(V)和边集(E)组成的有序对，G=(V,E)，可以用|V|，|E|表示图中的顶点数量和边数量<br>
 图既可以是有向的，即单向链接，也可以是无向的，即双向链接。<br>
@@ -66,7 +66,7 @@ out     -1 7 -1 5 6</p>
   </entry>
   <entry>
     <title>DFS与BFS</title>
-    <url>/2025/02/17/DFS%E4%B8%8EBFS/</url>
+    <url>//2025/02/17/DFS-and-BFS/</url>
     <content><![CDATA[<h1>模板</h1>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> dep)</span><span class="comment">//dep代表递归层数或要填的第几个空</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(所有空都填完了)</span><br><span class="line">    &#123;</span><br><span class="line">        判断最优解/记录答案；</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(枚举这个空能填的选项)</span><br><span class="line">        <span class="keyword">if</span>(这个选项是合法的)</span><br><span class="line">        &#123;</span><br><span class="line">            记录下这个空（保存现场）;</span><br><span class="line">            <span class="built_in">dfs</span>(dep<span class="number">+1</span>);</span><br><span class="line">            取消这个空（恢复现场）;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(初始状态)<span class="comment">//将初始状态入队</span></span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(枚举所有可扩展状态)<span class="comment">//找到u的所有可达状态v</span></span><br><span class="line">            <span class="keyword">if</span>(是合法的)<span class="comment">//v需要满足某些条件，如未访问过、未在队内等</span></span><br><span class="line">                q.<span class="built_in">push</span>(v);<span class="comment">//入队（同时可能需要维护某些必要信息）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1>树的遍历</h1>
@@ -77,7 +77,7 @@ out     -1 7 -1 5 6</p>
   </entry>
   <entry>
     <title>离散化与树状数组</title>
-    <url>/2025/02/21/%E7%A6%BB%E6%95%A3%E5%8C%96%E4%B8%8E%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/</url>
+    <url>//2025/02/21/discretization-and-BIT/</url>
     <content><![CDATA[<h1>离散化</h1>
 <p>特征：操作次数不多，相关点不多</p>
 <ul>
@@ -104,7 +104,7 @@ out     -1 7 -1 5 6</p>
   </entry>
   <entry>
     <title>CS61B学习记录</title>
-    <url>/2025/04/21/CS61B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <url>//2025/04/21/CS61B-study-notes/</url>
     <content><![CDATA[<h1>java基础知识</h1>
 <p>在java中，只有八种基本类型（byte,short,int,double,float,long,char,boolean）在调用时是值传递的调用，其他类型均为地址传递（引用）<br>
 所以，创建一个string类型的数组时，存放的是每个string类型的地址<br>
@@ -137,8 +137,29 @@ out     -1 7 -1 5 6</p>
       </tags>
   </entry>
   <entry>
+    <title>Jupyter7下的翻译问题的解决</title>
+    <url>//2025/08/15/Jupyter7-translation-fix/</url>
+    <content><![CDATA[<h1>Problem</h1>
+<p>jnb更新到7版本后，不少nbextension也随之失效，其中当然包括nbtranslate，</p>
+<p>尽管jnb7是基于jlab的，有着jlab的扩展支持，但其中也没有翻译方面的扩展。</p>
+<p>但不得不面对的是，不少ipynb是英文版本的，有些时候必然会造成困扰</p>
+<h1>Solution</h1>
+<p><del>提升英语水平，写一个python脚本，亦或者降级到jnb6()</del></p>
+<p>大模型时代当然要使用大模型，可以直接将文件喂给大模型，但是不氪金会受到点限制<br>
+寻找solution时，逛到jnb的侧栏ai agent，感觉很是方便，而且模型能自己选择，缺点是不氪金一个月只能对话50次（<del>可以换着号来用</del>），但是只用来翻译够用了</p>
+<p>下面呈现方法</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip install runcell</span><br></pre></td></tr></table></figure>
+<p>在查看(View)-右侧边栏(Right Sidebar)-show打开，用github/google登录即可</p>
+<hr>
+<p>破案了，直接vscode+jupyter+copilot完事</p>
+]]></content>
+      <tags>
+        <tag>Jupyter notebook</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>排序二分位运算双指针</title>
-    <url>/2025/05/06/%E6%8E%92%E5%BA%8F%E4%BA%8C%E5%88%86%E4%BD%8D%E8%BF%90%E7%AE%97%E5%8F%8C%E6%8C%87%E9%92%88/</url>
+    <url>//2025/05/06/sort-binary-search-bitwise-two-pointers/</url>
     <content><![CDATA[<h1>排序</h1>
 <h2 id="去重排序">去重排序</h2>
 <p>vector + sort + unique</p>
@@ -212,7 +233,7 @@ lowbit(x) = x &amp; (-x)<br>
   </entry>
   <entry>
     <title>Jupyter的缩写启动方式</title>
-    <url>/2025/08/15/Jupyter%E7%9A%84%E7%BC%A9%E5%86%99%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/</url>
+    <url>//2025/08/15/Jupyter-shortcut-launch/</url>
     <content><![CDATA[<h1>实现方法</h1>
 <p>找到Python Scripts文件夹（jupyter.exe 一般在这里）</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">C:\Program Files\Python310\Scripts</span><br></pre></td></tr></table></figure>
@@ -232,29 +253,8 @@ lowbit(x) = x &amp; (-x)<br>
       </tags>
   </entry>
   <entry>
-    <title>Jupyter7下的翻译问题的解决</title>
-    <url>/2025/08/15/Jupyter7%E4%B8%8B%E7%9A%84%E7%BF%BB%E8%AF%91%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/</url>
-    <content><![CDATA[<h1>Problem</h1>
-<p>jnb更新到7版本后，不少nbextension也随之失效，其中当然包括nbtranslate，</p>
-<p>尽管jnb7是基于jlab的，有着jlab的扩展支持，但其中也没有翻译方面的扩展。</p>
-<p>但不得不面对的是，不少ipynb是英文版本的，有些时候必然会造成困扰</p>
-<h1>Solution</h1>
-<p><del>提升英语水平，写一个python脚本，亦或者降级到jnb6()</del></p>
-<p>大模型时代当然要使用大模型，可以直接将文件喂给大模型，但是不氪金会受到点限制<br>
-寻找solution时，逛到jnb的侧栏ai agent，感觉很是方便，而且模型能自己选择，缺点是不氪金一个月只能对话50次（<del>可以换着号来用</del>），但是只用来翻译够用了</p>
-<p>下面呈现方法</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip install runcell</span><br></pre></td></tr></table></figure>
-<p>在查看(View)-右侧边栏(Right Sidebar)-show打开，用github/google登录即可</p>
-<hr>
-<p>破案了，直接vscode+jupyter+copilot完事</p>
-]]></content>
-      <tags>
-        <tag>Jupyter notebook</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>LLaMAFactory各参数详解</title>
-    <url>/2026/01/30/LLaMAFactory%E5%90%84%E5%8F%82%E6%95%B0%E8%AF%A6%E8%A7%A3/</url>
+    <url>//2026/01/30/LLaMAFactory-parameters-guide/</url>
     <content><![CDATA[<h3 id="1-模型与数据配置">1. 模型与数据配置</h3>
 <table>
 <thead>
@@ -705,68 +705,6 @@ lowbit(x) = x &amp; (-x)<br>
       </tags>
   </entry>
   <entry>
-    <title>前缀和与差分</title>
-    <url>/2025/02/05/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/</url>
-    <content><![CDATA[<p>要对原数组a[N]进行修改与查询，需要用到前缀和数组和差分数组<br>
-diff求和——&gt;a 求和——&gt;prefix</p>
-<p>diff&lt;——a差分&lt;——prefix差分</p>
-<h1>一维前缀和与差分</h1>
-<h2 id="前缀和">前缀和</h2>
-<p>前缀和可用于求指定区间的和</p>
-<ol>
-<li><strong>求出前缀和数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">前缀和数组的计算:prefix[i] = prefix[i<span class="number">-1</span>] + arr[i] (此处及下文写法i均从<span class="number">1</span>开始，以防止越界问题)</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>得出区间和</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">由前缀和的可加性:sum[<span class="number">1</span>,k] + sum[k<span class="number">+1</span>,n] = sum[<span class="number">1</span>,n]</span><br><span class="line">得到sum[l,r] = sum[<span class="number">1</span>,r] - sum[<span class="number">1</span>,l<span class="number">-1</span>]，即sum=prefix[r]-prefix[l<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="差分">差分</h2>
-<p>差分可用于修改指定区间的值</p>
-<ol>
-<li><strong>求出差分数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[i] = a[i] - a[i<span class="number">-1</span>]，它具有两个性质，一是可以通过求和得到a[i]，二是可以对后缀区间进行修改</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>对指定区间[l,r]的值进行修改</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[l] += x;</span><br><span class="line">diff[r + <span class="number">1</span>] -= x;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[i] = a[i<span class="number">-1</span>] + diff[i]</span><br></pre></td></tr></table></figure>
-<hr>
-<h1>二维前缀和与差分</h1>
-<p><strong>利用数形结合</strong>，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
-<h2 id="前缀和-v2">前缀和</h2>
-<ol>
-<li><strong>求出前缀和数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        prefix[i][j] = prefix[i<span class="number">-1</span>][j] + prefix[i][j<span class="number">-1</span>] - prefix[i<span class="number">-1</span>][j<span class="number">-1</span>] + arr[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>得出区间和</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">对于指定区间，设左上角为(x1, y1)，右下角为(x2, y2)</span><br><span class="line">sum = prefix[x2][y2] - prefix[x2][y1<span class="number">-1</span>] - prefix[x1<span class="number">-1</span>][y2] + prefix[x1<span class="number">-1</span>][y1<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
-<h2 id="差分-v2">差分</h2>
-<ol>
-<li><strong>求出差分数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        d[i][j] = arr[i][j] - arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j] + arr[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">&#123;d[i][j] += a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j] -= a[i][j];</span><br><span class="line">d[i][j + <span class="number">1</span>] -= a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j + <span class="number">1</span>] += a[i][j];&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>对指定区间[(x1,y1),(x2,y2)]的值进行修改</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">d[x1][y1] += c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">d[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        arr[i][j] = arr[i<span class="number">-1</span>][j] + arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j<span class="number">-1</span>] + d[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2025/01/20/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -1025,6 +963,68 @@ diff求和——&gt;a 求和——&gt;prefix</p>
 ]]></content>
       <tags>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前缀和与差分</title>
+    <url>//2025/02/05/prefix-sum-and-difference/</url>
+    <content><![CDATA[<p>要对原数组a[N]进行修改与查询，需要用到前缀和数组和差分数组<br>
+diff求和——&gt;a 求和——&gt;prefix</p>
+<p>diff&lt;——a差分&lt;——prefix差分</p>
+<h1>一维前缀和与差分</h1>
+<h2 id="前缀和">前缀和</h2>
+<p>前缀和可用于求指定区间的和</p>
+<ol>
+<li><strong>求出前缀和数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">前缀和数组的计算:prefix[i] = prefix[i<span class="number">-1</span>] + arr[i] (此处及下文写法i均从<span class="number">1</span>开始，以防止越界问题)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>得出区间和</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">由前缀和的可加性:sum[<span class="number">1</span>,k] + sum[k<span class="number">+1</span>,n] = sum[<span class="number">1</span>,n]</span><br><span class="line">得到sum[l,r] = sum[<span class="number">1</span>,r] - sum[<span class="number">1</span>,l<span class="number">-1</span>]，即sum=prefix[r]-prefix[l<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="差分">差分</h2>
+<p>差分可用于修改指定区间的值</p>
+<ol>
+<li><strong>求出差分数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[i] = a[i] - a[i<span class="number">-1</span>]，它具有两个性质，一是可以通过求和得到a[i]，二是可以对后缀区间进行修改</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>对指定区间[l,r]的值进行修改</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[l] += x;</span><br><span class="line">diff[r + <span class="number">1</span>] -= x;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[i] = a[i<span class="number">-1</span>] + diff[i]</span><br></pre></td></tr></table></figure>
+<hr>
+<h1>二维前缀和与差分</h1>
+<p><strong>利用数形结合</strong>，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
+<h2 id="前缀和-v2">前缀和</h2>
+<ol>
+<li><strong>求出前缀和数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        prefix[i][j] = prefix[i<span class="number">-1</span>][j] + prefix[i][j<span class="number">-1</span>] - prefix[i<span class="number">-1</span>][j<span class="number">-1</span>] + arr[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>得出区间和</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">对于指定区间，设左上角为(x1, y1)，右下角为(x2, y2)</span><br><span class="line">sum = prefix[x2][y2] - prefix[x2][y1<span class="number">-1</span>] - prefix[x1<span class="number">-1</span>][y2] + prefix[x1<span class="number">-1</span>][y1<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="差分-v2">差分</h2>
+<ol>
+<li><strong>求出差分数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        d[i][j] = arr[i][j] - arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j] + arr[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">&#123;d[i][j] += a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j] -= a[i][j];</span><br><span class="line">d[i][j + <span class="number">1</span>] -= a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j + <span class="number">1</span>] += a[i][j];&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>对指定区间[(x1,y1),(x2,y2)]的值进行修改</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">d[x1][y1] += c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">d[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        arr[i][j] = arr[i<span class="number">-1</span>][j] + arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j<span class="number">-1</span>] + d[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+]]></content>
+      <tags>
+        <tag>算法</tag>
       </tags>
   </entry>
 </search>

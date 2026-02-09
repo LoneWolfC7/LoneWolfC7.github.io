@@ -1,3 +1,4 @@
+/*map start*/
 //get请求
 $.ajax({
     type: 'get',
@@ -28,8 +29,8 @@ function getDistance(e1, n1, e2, n2) {
 }
 
 function showWelcome() {
-//115.96989319417935, 36.44414713764744
-    let dist = getDistance(115.96989,36.44414 , ipLoacation.result.location.lng, ipLoacation.result.location.lat); //这里换成自己的经纬度
+
+    let dist = getDistance(113.34499552, 23.15537143, ipLoacation.result.location.lng, ipLoacation.result.location.lat); //这里换成自己的经纬度
     let pos = ipLoacation.result.ad_info.nation;
     let ip;
     let posdesc;
@@ -212,18 +213,7 @@ function showWelcome() {
     else if (date.getHours() >= 19 && date.getHours() < 24) timeChange = "<span>晚上好</span>，夜生活嗨起来！";
     else timeChange = "夜深了，早点休息，少熬夜。";
 
-    if (ip.length > 15) {
-        ip = '好复杂，咱看不懂~(ipv6)';
-    }
-
-    if (ip.includes(':')) {
-    ip = '好复杂，咱看不懂~(ipv6)';
-}
-
     try {
-        if (ip.length > 15) {
-        ip = '好复杂，咱看不懂~(ipv6)';
-    }
         //自定义文本和需要放的位置
         document.getElementById("welcome-info").innerHTML =
             `<b><center>🎉 欢迎信息 🎉</center>&emsp;&emsp;欢迎来自 <span style="color:var(--theme-color)">${pos}</span> 的小伙伴，${timeChange}您现在距离站长约 <span style="color:var(--theme-color)">${dist}</span> 公里，当前的IP地址为： <span style="color:var(--theme-color)">${ip}</span>， ${posdesc}</b>`;
@@ -234,3 +224,4 @@ function showWelcome() {
 window.onload = showWelcome;
 // 如果使用了pjax在加上下面这行代码
 document.addEventListener('pjax:complete', showWelcome);
+/*map end*/
