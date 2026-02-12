@@ -31,7 +31,6 @@ body::-webkit-scrollbar {
     text-align: center;
     line-height: 100px;
     top: -115%;
-
 }
 
 .neko.showMsg::after {
@@ -50,28 +49,4 @@ body::-webkit-scrollbar {
 
 .neko.fontColor::after {
     color: #333;
-}
-
-/**
- * @description: 滚动条样式  跟猫二选一
- */
-@media screen and (max-width:992px) {
-    ::-webkit-scrollbar {
-        width: 8px !important;
-        height: 8px !important
-    }
-
-    ::-webkit-scrollbar-track {
-        border-radius: 2em;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background-color: rgb(255 255 255 / .3);
-        background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 75%, transparent 75%, transparent);
-        border-radius: 2em
-    }
-
-    ::-webkit-scrollbar-corner {
-        background-color: transparent
-    }
 }
