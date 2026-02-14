@@ -65,17 +65,6 @@ out     -1 7 -1 5 6</p>
       </tags>
   </entry>
   <entry>
-    <title>DFS与BFS</title>
-    <url>//2025/02/17/DFS-and-BFS/</url>
-    <content><![CDATA[<h1 id="模板">模板</h1>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> dep)</span><span class="comment">//dep代表递归层数或要填的第几个空</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(所有空都填完了)</span><br><span class="line">    &#123;</span><br><span class="line">        判断最优解/记录答案；</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(枚举这个空能填的选项)</span><br><span class="line">        <span class="keyword">if</span>(这个选项是合法的)</span><br><span class="line">        &#123;</span><br><span class="line">            记录下这个空（保存现场）;</span><br><span class="line">            <span class="built_in">dfs</span>(dep<span class="number">+1</span>);</span><br><span class="line">            取消这个空（恢复现场）;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(初始状态)<span class="comment">//将初始状态入队</span></span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(枚举所有可扩展状态)<span class="comment">//找到u的所有可达状态v</span></span><br><span class="line">            <span class="keyword">if</span>(是合法的)<span class="comment">//v需要满足某些条件，如未访问过、未在队内等</span></span><br><span class="line">                q.<span class="built_in">push</span>(v);<span class="comment">//入队（同时可能需要维护某些必要信息）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="树的遍历">树的遍历</h1>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>离散化与树状数组</title>
     <url>//2025/02/21/discretization-and-BIT/</url>
     <content><![CDATA[<h1 id="离散化">离散化</h1>
@@ -103,37 +92,14 @@ out     -1 7 -1 5 6</p>
       </tags>
   </entry>
   <entry>
-    <title>CS61B学习记录</title>
-    <url>//2025/04/21/CS61B-study-notes/</url>
-    <content><![CDATA[<h1 id="java基础知识">java基础知识</h1>
-<p>在java中，只有八种基本类型（byte,short,int,double,float,long,char,boolean）在调用时是值传递的调用，其他类型均为地址传递（引用）<br>
-所以，创建一个string类型的数组时，存放的是每个string类型的地址<br>
-创建一个数组的方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line">y = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="type">int</span> [] z = &#123;<span class="number">9</span>,<span class="number">213</span>,<span class="number">41</span>,<span class="number">12</span>&#125;;</span><br></pre></td></tr></table></figure>
-<p>类可以进行嵌套。如SLList里嵌套了IntNode类，IntNode只是SLList的一个子功能<br>
-泛型实例化不能直接对数组使用，而要通过</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">items = (T[]) <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">9</span>];</span><br></pre></td></tr></table></figure>
-<p>语句实现</p>
-<h1 id="IntList">IntList</h1>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntList</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> first;</span><br><span class="line">    <span class="keyword">public</span> IntList rest;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">L</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">IntList</span>();</span><br><span class="line">        L.first = <span class="number">5</span>;</span><br><span class="line">        L.rest = <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//创建第一个新节点</span></span><br><span class="line">        L.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>();</span><br><span class="line">        L.rest.first = <span class="number">15</span>;</span><br><span class="line">        <span class="comment">//创建第二个新节点</span></span><br><span class="line">        L.rest.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>();</span><br><span class="line">        L.rest.first = <span class="number">20</span>;</span><br><span class="line">        L.rest.rest.rest= <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但当结点过多时，每次这样添加结点过于臃肿，所以为其添加构造函数，反向构建列表（尾插法）。并添加了大小和获取结点的方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntList</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> first;</span><br><span class="line">    <span class="keyword">public</span> IntList rest;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">IntList</span><span class="params">(<span class="type">int</span> f,IntList r)</span></span><br><span class="line">    &#123;</span><br><span class="line">        first=f;</span><br><span class="line">        rest=r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size1</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(rest==<span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + rest.size1();</span><br><span class="line">    &#125;<span class="comment">//递归法获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size2</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="built_in">this</span>;<span class="comment">//Node* temp=head;</span></span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">null</span>)<span class="comment">//while(temp-&gt;next!=nullptr)</span></span><br><span class="line">        &#123;</span><br><span class="line">            total+=<span class="number">1</span>;</span><br><span class="line">            p=p.rest;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;<span class="comment">//迭代法获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get1</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">0</span>)<span class="keyword">return</span> first;</span><br><span class="line">        <span class="keyword">return</span> rest.get1(i-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get2</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">place</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">while</span>(place!=i)</span><br><span class="line">        &#123;</span><br><span class="line">            place++;</span><br><span class="line">            p=p.rest;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p.first;</span><br><span class="line">    &#125;<span class="comment">//迭代法获取链表中第i个结点的值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">15</span>,<span class="literal">null</span>);</span><br><span class="line">        L = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">10</span>,L);</span><br><span class="line">        L = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">5</span>,L);</span><br><span class="line">        System.out.println(L.size1());</span><br><span class="line">        System.out.println(L.size2());</span><br><span class="line">        System.out.println(L.get1(<span class="number">2</span>));</span><br><span class="line">        System.out.println(L.get2(<span class="number">2</span>));</span><br><span class="line">    &#125;<span class="comment">//5-&gt;10-&gt;15</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="SLList-singly-linked-list">SLList(singly-linked list)</h1>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SLList</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">IntNode</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> item;</span><br><span class="line">        <span class="keyword">public</span> IntNode next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">IntNode</span><span class="params">(<span class="type">int</span> i, IntNode n)</span> &#123;</span><br><span class="line">            item = i;</span><br><span class="line">            next = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line">    <span class="keyword">private</span> IntNode first;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="comment">//构造函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        first = <span class="literal">null</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addfirst</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x,first);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//头插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addlast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntNode</span> <span class="variable">p</span> <span class="operator">=</span> first;</span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        p = <span class="keyword">new</span> <span class="title class_">IntNode</span> (x,<span class="literal">null</span>);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//尾插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getfirst</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> first.item;</span><br><span class="line">    &#125;<span class="comment">//得到第一个节点的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">(IntNode p)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p==<span class="literal">null</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + size(p.next);</span><br><span class="line">    &#125;<span class="comment">//辅助size()</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line"><span class="comment">//        return size(first);</span></span><br><span class="line">    &#125;<span class="comment">//获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">SLList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SLList</span>(<span class="number">3</span>);</span><br><span class="line">        p.addfirst(<span class="number">32</span>);</span><br><span class="line">        System.out.println(p.getfirst());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但当我们对空列表进行尾插时，会发生报错，是因为Null不存在next，可以将特殊情况特判，但当方法很多时会过于臃肿。因此我们需要设置一个虚首节点“哨兵”</p>
-<p>现存方法：头插法，尾插法，大小，得到第一个节点的值</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SLList</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">IntNode</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> item;</span><br><span class="line">        <span class="keyword">public</span> IntNode next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">IntNode</span><span class="params">(<span class="type">int</span> i, IntNode n)</span> &#123;</span><br><span class="line">            item = i;</span><br><span class="line">            next = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line">    <span class="keyword">private</span> IntNode Sentinel;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        Sentinel = <span class="keyword">new</span> <span class="title class_">IntNode</span>(<span class="number">0</span>,<span class="literal">null</span>);</span><br><span class="line">        Sentinel.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="comment">//构造函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Sentinel = <span class="keyword">new</span> <span class="title class_">IntNode</span>(<span class="number">0</span>,<span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addfirst</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Sentinel.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x,Sentinel.next);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//头插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addlast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntNode</span> <span class="variable">p</span> <span class="operator">=</span> Sentinel;</span><br><span class="line">        <span class="keyword">while</span>(p.next!=<span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        p.next = <span class="keyword">new</span> <span class="title class_">IntNode</span> (x,<span class="literal">null</span>);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//尾插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getfirst</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Sentinel.next.item;</span><br><span class="line">    &#125;<span class="comment">//得到第一个节点的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">(IntNode p)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p==<span class="literal">null</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + size(p.next);</span><br><span class="line">    &#125;<span class="comment">//辅助size()</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line"><span class="comment">//        return size(first);</span></span><br><span class="line">    &#125;<span class="comment">//获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">SLList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SLList</span>(<span class="number">3</span>);</span><br><span class="line">        p.addfirst(<span class="number">32</span>);</span><br><span class="line">        System.out.println(p.getfirst());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="DLList">DLList</h1>
-<p>上述尾插的时间复杂度为O(n)，为优化为O(1)，我们可以在链表末尾添加一个尾指针。但addlast函数就会存在问题。这时我们构建双向链表，但此时又存在尾指针指向“哨兵”的情况。解决方法有：在末尾再设置一个“哨兵”or将尾指针指向起始“哨兵”</p>
-<h1 id="AList">AList</h1>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AList</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] items;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AList</span><span class="params">()</span> &#123;</span><br><span class="line">        items = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">100</span>];</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addlast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        items[size] = x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getlast</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> items[size-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> items[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removelast</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> getlast();</span><br><span class="line">        size--;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">resize</span><span class="params">(<span class="type">int</span> capacity)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> [] a = <span class="keyword">new</span> <span class="title class_">int</span> [capacity];</span><br><span class="line">        System.arraycopy(items,<span class="number">0</span>,a,<span class="number">0</span>,size);</span><br><span class="line">        items = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(size == items.length)resize(size * <span class="number">2</span>);</span><br><span class="line">        items[size]=x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="BST">BST</h1>
-<p>二叉搜索树，由有序链表形成，需满足 1.二叉树 2.左边的子节点比本节点小，右边的节点比本节点大</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> BST <span class="title function_">find</span><span class="params">(BST T , Key sk)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span>(sk.equals(T.key)) <span class="keyword">return</span> T;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(sk&lt;T.key) <span class="keyword">return</span> find(T.left , sk);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> find(T.right , sk);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> BST <span class="title function_">insert</span><span class="params">(BST T , Key ik)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BST</span>(ik);</span><br><span class="line">    <span class="keyword">if</span>(ik &lt; T.key) T.left = insert(T.left , ik);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(ik &gt; T.key) T.right = insert(T.right , ik);</span><br><span class="line">    <span class="keyword">return</span> T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>删除节点时，若无子节点直接取消引用，有一个子节点直接父节点指向子节点，有两个节点时，将所有子节点中最大/最小的节点作为根节点</p>
+    <title>DFS与BFS</title>
+    <url>//2025/02/17/DFS-and-BFS/</url>
+    <content><![CDATA[<h1 id="模板">模板</h1>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> dep)</span><span class="comment">//dep代表递归层数或要填的第几个空</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(所有空都填完了)</span><br><span class="line">    &#123;</span><br><span class="line">        判断最优解/记录答案；</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(枚举这个空能填的选项)</span><br><span class="line">        <span class="keyword">if</span>(这个选项是合法的)</span><br><span class="line">        &#123;</span><br><span class="line">            记录下这个空（保存现场）;</span><br><span class="line">            <span class="built_in">dfs</span>(dep<span class="number">+1</span>);</span><br><span class="line">            取消这个空（恢复现场）;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bfs</span><span class="params">(<span class="type">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">    q.<span class="built_in">push</span>(初始状态)<span class="comment">//将初始状态入队</span></span><br><span class="line">    <span class="keyword">while</span>(q.<span class="built_in">size</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> u = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">for</span>(枚举所有可扩展状态)<span class="comment">//找到u的所有可达状态v</span></span><br><span class="line">            <span class="keyword">if</span>(是合法的)<span class="comment">//v需要满足某些条件，如未访问过、未在队内等</span></span><br><span class="line">                q.<span class="built_in">push</span>(v);<span class="comment">//入队（同时可能需要维护某些必要信息）</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="树的遍历">树的遍历</h1>
 ]]></content>
       <tags>
-        <tag>数据结构</tag>
+        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -211,24 +177,37 @@ lowbit(x) = x &amp; (-x)<br>
       </tags>
   </entry>
   <entry>
-    <title>Jupyter7下的翻译问题的解决</title>
-    <url>//2025/08/15/Jupyter7-translation-fix/</url>
-    <content><![CDATA[<h1 id="Problem">Problem</h1>
-<p>jnb更新到7版本后，不少nbextension也随之失效，其中当然包括nbtranslate，</p>
-<p>尽管jnb7是基于jlab的，有着jlab的扩展支持，但其中也没有翻译方面的扩展。</p>
-<p>但不得不面对的是，不少ipynb是英文版本的，有些时候必然会造成困扰</p>
-<h1 id="Solution">Solution</h1>
-<p><del>提升英语水平，写一个python脚本，亦或者降级到jnb6()</del></p>
-<p>大模型时代当然要使用大模型，可以直接将文件喂给大模型，但是不氪金会受到点限制<br>
-寻找solution时，逛到jnb的侧栏ai agent，感觉很是方便，而且模型能自己选择，缺点是不氪金一个月只能对话50次（<del>可以换着号来用</del>），但是只用来翻译够用了</p>
-<p>下面呈现方法</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip install runcell</span><br></pre></td></tr></table></figure>
-<p>在查看(View)-右侧边栏(Right Sidebar)-show打开，用github/google登录即可</p>
-<hr>
-<p>破案了，直接vscode+jupyter+copilot完事</p>
+    <title>CS61B学习记录</title>
+    <url>//2025/04/21/CS61B-study-notes/</url>
+    <content><![CDATA[<h1 id="java基础知识">java基础知识</h1>
+<p>在java中，只有八种基本类型（byte,short,int,double,float,long,char,boolean）在调用时是值传递的调用，其他类型均为地址传递（引用）<br>
+所以，创建一个string类型的数组时，存放的是每个string类型的地址<br>
+创建一个数组的方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">x = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">3</span>];</span><br><span class="line">y = <span class="keyword">new</span> <span class="title class_">int</span>[]&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="type">int</span> [] z = &#123;<span class="number">9</span>,<span class="number">213</span>,<span class="number">41</span>,<span class="number">12</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>类可以进行嵌套。如SLList里嵌套了IntNode类，IntNode只是SLList的一个子功能<br>
+泛型实例化不能直接对数组使用，而要通过</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">items = (T[]) <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">9</span>];</span><br></pre></td></tr></table></figure>
+<p>语句实现</p>
+<h1 id="IntList">IntList</h1>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntList</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> first;</span><br><span class="line">    <span class="keyword">public</span> IntList rest;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">L</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">IntList</span>();</span><br><span class="line">        L.first = <span class="number">5</span>;</span><br><span class="line">        L.rest = <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//创建第一个新节点</span></span><br><span class="line">        L.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>();</span><br><span class="line">        L.rest.first = <span class="number">15</span>;</span><br><span class="line">        <span class="comment">//创建第二个新节点</span></span><br><span class="line">        L.rest.rest = <span class="keyword">new</span> <span class="title class_">IntList</span>();</span><br><span class="line">        L.rest.first = <span class="number">20</span>;</span><br><span class="line">        L.rest.rest.rest= <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但当结点过多时，每次这样添加结点过于臃肿，所以为其添加构造函数，反向构建列表（尾插法）。并添加了大小和获取结点的方法</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IntList</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> first;</span><br><span class="line">    <span class="keyword">public</span> IntList rest;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">IntList</span><span class="params">(<span class="type">int</span> f,IntList r)</span></span><br><span class="line">    &#123;</span><br><span class="line">        first=f;</span><br><span class="line">        rest=r;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size1</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(rest==<span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + rest.size1();</span><br><span class="line">    &#125;<span class="comment">//递归法获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size2</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">total</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="built_in">this</span>;<span class="comment">//Node* temp=head;</span></span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">null</span>)<span class="comment">//while(temp-&gt;next!=nullptr)</span></span><br><span class="line">        &#123;</span><br><span class="line">            total+=<span class="number">1</span>;</span><br><span class="line">            p=p.rest;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> total;</span><br><span class="line">    &#125;<span class="comment">//迭代法获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get1</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">0</span>)<span class="keyword">return</span> first;</span><br><span class="line">        <span class="keyword">return</span> rest.get1(i-<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get2</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">place</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">while</span>(place!=i)</span><br><span class="line">        &#123;</span><br><span class="line">            place++;</span><br><span class="line">            p=p.rest;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> p.first;</span><br><span class="line">    &#125;<span class="comment">//迭代法获取链表中第i个结点的值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntList</span> <span class="variable">L</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">15</span>,<span class="literal">null</span>);</span><br><span class="line">        L = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">10</span>,L);</span><br><span class="line">        L = <span class="keyword">new</span> <span class="title class_">IntList</span>(<span class="number">5</span>,L);</span><br><span class="line">        System.out.println(L.size1());</span><br><span class="line">        System.out.println(L.size2());</span><br><span class="line">        System.out.println(L.get1(<span class="number">2</span>));</span><br><span class="line">        System.out.println(L.get2(<span class="number">2</span>));</span><br><span class="line">    &#125;<span class="comment">//5-&gt;10-&gt;15</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="SLList-singly-linked-list">SLList(singly-linked list)</h1>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SLList</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">IntNode</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> item;</span><br><span class="line">        <span class="keyword">public</span> IntNode next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">IntNode</span><span class="params">(<span class="type">int</span> i, IntNode n)</span> &#123;</span><br><span class="line">            item = i;</span><br><span class="line">            next = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line">    <span class="keyword">private</span> IntNode first;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="comment">//构造函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        first = <span class="literal">null</span>;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addfirst</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        first = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x,first);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//头插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addlast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntNode</span> <span class="variable">p</span> <span class="operator">=</span> first;</span><br><span class="line">        <span class="keyword">while</span>(p!=<span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        p = <span class="keyword">new</span> <span class="title class_">IntNode</span> (x,<span class="literal">null</span>);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//尾插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getfirst</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> first.item;</span><br><span class="line">    &#125;<span class="comment">//得到第一个节点的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">(IntNode p)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p==<span class="literal">null</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + size(p.next);</span><br><span class="line">    &#125;<span class="comment">//辅助size()</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line"><span class="comment">//        return size(first);</span></span><br><span class="line">    &#125;<span class="comment">//获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">SLList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SLList</span>(<span class="number">3</span>);</span><br><span class="line">        p.addfirst(<span class="number">32</span>);</span><br><span class="line">        System.out.println(p.getfirst());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但当我们对空列表进行尾插时，会发生报错，是因为Null不存在next，可以将特殊情况特判，但当方法很多时会过于臃肿。因此我们需要设置一个虚首节点“哨兵”</p>
+<p>现存方法：头插法，尾插法，大小，得到第一个节点的值</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SLList</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">IntNode</span> &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> item;</span><br><span class="line">        <span class="keyword">public</span> IntNode next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">IntNode</span><span class="params">(<span class="type">int</span> i, IntNode n)</span> &#123;</span><br><span class="line">            item = i;</span><br><span class="line">            next = n;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line">    <span class="keyword">private</span> IntNode Sentinel;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">(<span class="type">int</span> x)</span> &#123;</span><br><span class="line">        Sentinel = <span class="keyword">new</span> <span class="title class_">IntNode</span>(<span class="number">0</span>,<span class="literal">null</span>);</span><br><span class="line">        Sentinel.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x, <span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="comment">//构造函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SLList</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        Sentinel = <span class="keyword">new</span> <span class="title class_">IntNode</span>(<span class="number">0</span>,<span class="literal">null</span>);</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addfirst</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        Sentinel.next = <span class="keyword">new</span> <span class="title class_">IntNode</span>(x,Sentinel.next);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//头插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addlast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">IntNode</span> <span class="variable">p</span> <span class="operator">=</span> Sentinel;</span><br><span class="line">        <span class="keyword">while</span>(p.next!=<span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            p = p.next;</span><br><span class="line">        &#125;</span><br><span class="line">        p.next = <span class="keyword">new</span> <span class="title class_">IntNode</span> (x,<span class="literal">null</span>);</span><br><span class="line">        size++;</span><br><span class="line">    &#125;<span class="comment">//尾插法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getfirst</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Sentinel.next.item;</span><br><span class="line">    &#125;<span class="comment">//得到第一个节点的值</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">(IntNode p)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p==<span class="literal">null</span>)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + size(p.next);</span><br><span class="line">    &#125;<span class="comment">//辅助size()</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line"><span class="comment">//        return size(first);</span></span><br><span class="line">    &#125;<span class="comment">//获取链表大小</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">SLList</span> <span class="variable">p</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SLList</span>(<span class="number">3</span>);</span><br><span class="line">        p.addfirst(<span class="number">32</span>);</span><br><span class="line">        System.out.println(p.getfirst());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="DLList">DLList</h1>
+<p>上述尾插的时间复杂度为O(n)，为优化为O(1)，我们可以在链表末尾添加一个尾指针。但addlast函数就会存在问题。这时我们构建双向链表，但此时又存在尾指针指向“哨兵”的情况。解决方法有：在末尾再设置一个“哨兵”or将尾指针指向起始“哨兵”</p>
+<h1 id="AList">AList</h1>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AList</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span>[] items;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">AList</span><span class="params">()</span> &#123;</span><br><span class="line">        items = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">100</span>];</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addlast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        items[size] = x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getlast</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> items[size-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> i)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> items[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">removelast</span><span class="params">()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> getlast();</span><br><span class="line">        size--;</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">resize</span><span class="params">(<span class="type">int</span> capacity)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> [] a = <span class="keyword">new</span> <span class="title class_">int</span> [capacity];</span><br><span class="line">        System.arraycopy(items,<span class="number">0</span>,a,<span class="number">0</span>,size);</span><br><span class="line">        items = a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(<span class="type">int</span> x)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(size == items.length)resize(size * <span class="number">2</span>);</span><br><span class="line">        items[size]=x;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="BST">BST</h1>
+<p>二叉搜索树，由有序链表形成，需满足 1.二叉树 2.左边的子节点比本节点小，右边的节点比本节点大</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> BST <span class="title function_">find</span><span class="params">(BST T , Key sk)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">if</span>(sk.equals(T.key)) <span class="keyword">return</span> T;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(sk&lt;T.key) <span class="keyword">return</span> find(T.left , sk);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> find(T.right , sk);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> BST <span class="title function_">insert</span><span class="params">(BST T , Key ik)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">null</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">BST</span>(ik);</span><br><span class="line">    <span class="keyword">if</span>(ik &lt; T.key) T.left = insert(T.left , ik);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(ik &gt; T.key) T.right = insert(T.right , ik);</span><br><span class="line">    <span class="keyword">return</span> T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>删除节点时，若无子节点直接取消引用，有一个子节点直接父节点指向子节点，有两个节点时，将所有子节点中最大/最小的节点作为根节点</p>
 ]]></content>
       <tags>
-        <tag>Jupyter notebook</tag>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -250,6 +229,81 @@ lowbit(x) = x &amp; (-x)<br>
 ]]></content>
       <tags>
         <tag>Jupyter notebook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jupyter7下的翻译问题的解决</title>
+    <url>//2025/08/15/Jupyter7-translation-fix/</url>
+    <content><![CDATA[<h1 id="Problem">Problem</h1>
+<p>jnb更新到7版本后，不少nbextension也随之失效，其中当然包括nbtranslate，</p>
+<p>尽管jnb7是基于jlab的，有着jlab的扩展支持，但其中也没有翻译方面的扩展。</p>
+<p>但不得不面对的是，不少ipynb是英文版本的，有些时候必然会造成困扰</p>
+<h1 id="Solution">Solution</h1>
+<p><del>提升英语水平，写一个python脚本，亦或者降级到jnb6()</del></p>
+<p>大模型时代当然要使用大模型，可以直接将文件喂给大模型，但是不氪金会受到点限制<br>
+寻找solution时，逛到jnb的侧栏ai agent，感觉很是方便，而且模型能自己选择，缺点是不氪金一个月只能对话50次（<del>可以换着号来用</del>），但是只用来翻译够用了</p>
+<p>下面呈现方法</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip install runcell</span><br></pre></td></tr></table></figure>
+<p>在查看(View)-右侧边栏(Right Sidebar)-show打开，用github/google登录即可</p>
+<hr>
+<p>破案了，直接vscode+jupyter+copilot完事</p>
+]]></content>
+      <tags>
+        <tag>Jupyter notebook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DL基础</title>
+    <url>//2026/02/13/baseDL/</url>
+    <content><![CDATA[<h2 id="激活函数">激活函数</h2>
+<p>$g’(z)=g(z)(1-g(z))$<img src="https://pic1.imgdb.cn/item/698f3affe887663d376fdb91.png" alt="sigmoid"></p>
+<p>tanh：$g(z)=tanh(z)=a=\frac{e^z-e^{-z}}{e^z+e^{-z}}$,$g’(z)=(1-g^2(z))$<img src="https://pic1.imgdb.cn/item/698f3affe887663d376fdb8f.png" alt="tanh"></p>
+<p>ReLU:$g(z)=a=max(0,z)$<img src="https://pic1.imgdb.cn/item/698f3affe887663d376fdb90.png" alt="ReLU"></p>
+<p>leaky ReLU:$a=max(0.01z,z)$<img src="https://pic1.imgdb.cn/item/698f3afee887663d376fdb8e.png" alt="leaky ReLU"></p>
+<h2 id="损失函数">损失函数</h2>
+<p>常见的损失函数有均方误差和交叉熵误差</p>
+<h3 id="均方误差-MSE">均方误差(MSE)</h3>
+<p><strong>公式</strong>：$E = \frac{1}{2} \sum_{k}(y_k - t_k)^2$，其中$y_k$表示神经网络的输出，$t_k$表示监督数据，k表示数据的维数。</p>
+<p><strong>python实现</strong>：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mean_squared_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.5</span> * np.<span class="built_in">sum</span>((y-t)**<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="交叉熵误差">交叉熵误差</h3>
+<p><strong>公式</strong>：$E = -\sum_{k} t_k \log y_k$</p>
+<p><strong>python实现：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cross_entropy_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    delta = <span class="number">1e-7</span></span><br><span class="line">    <span class="keyword">return</span> -np.<span class="built_in">sum</span>(t * np.log(y + delta))</span><br></pre></td></tr></table></figure>
+<p>这里，参数y和t是NumPy数组。函数内部在计算np.log时，加上了一个微小值delta。这是因为，当出现np.log(0)时，np.log(0)会变为负无限大的-inf，这样一来就会导致后续计算无法进行。作为保护性对策，添加一个微小值可以防止负无限大的发生。</p>
+<h2 id="one-hot编码">one-hot编码</h2>
+<p>将正确解标签表示为1，其他标签表示为0的表示方法称为<strong>one-hot编码</strong></p>
+<h2 id="mini-batch">mini-batch</h2>
+<p>神经网络的学习也是从训练数据中选出一批数据，然后对每个mini-batch进行学习。比如，从60000个训练数据中随机选择100笔，再用这100笔数据进行学习。这种学习方式称为<strong>mini-batch学习</strong>，同时，mini-batch的损失函数也是利用 一部分样本数据来近似地计算整体</p>
+<h3 id="mini-batch版交叉熵误差的实现">mini-batch版交叉熵误差的实现</h3>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cross_entropy_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    <span class="keyword">if</span> y.ndim == <span class="number">1</span>:</span><br><span class="line">        t = t.reshape(<span class="number">1</span>, t.size)</span><br><span class="line">        y = y.reshape(<span class="number">1</span>, y.size)</span><br><span class="line">    batch_size = y.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> -np.<span class="built_in">sum</span>(t * np.log(y + <span class="number">1e-7</span>)) / batch_size</span><br></pre></td></tr></table></figure>
+<p>当监督数据是标签形式（非one-hot表示，而是像“2”“ 7”这样的标签）时，交叉熵误差可通过如下代码实现。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cross_entropy_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    <span class="keyword">if</span> y.ndim == <span class="number">1</span>:</span><br><span class="line">        t = t.reshape(<span class="number">1</span>, t.size)</span><br><span class="line">        y = y.reshape(<span class="number">1</span>, y.size)</span><br><span class="line">    batch_size = y.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> -np.<span class="built_in">sum</span>(np.log(y[np.arange(batch_size), t] + <span class="number">1e-7</span>)) / batch_size</span><br></pre></td></tr></table></figure>
+<p>实现的要点是，由于one-hot表示中t为0的元素的交叉熵误差也为0，因 此针对这些元素的计算可以忽略。换言之，如果可以获得神经网络在正确解标签处的输出，就可以计算交叉熵误差。因此，t为one-hot表示时通过 t * np.log(y) 计算的地方，在t为标签形式时，可用np.log( y[np.arange  (batch_size), t] )实现相同的处理</p>
+<h2 id="梯度法">梯度法</h2>
+<p>通过使用梯度来寻找函数最小值（或者尽可能小的值）的方法，即通过不断地沿梯度方向前进， 逐渐减小函数值的过程，常见的参数更新公式$x_0 = x_0 - \eta \frac{\partial f}{\partial x_0}$、$x_1 = x_1 - \eta \frac{\partial f}{\partial x_1}$就来自于此</p>
+<p>通过梯度下降法更新参数，并且当使用的数据是随机选择的mini batch数据时，称该方法为随机梯度下降法(SGD)</p>
+<h2 id="神经网络的学习过程">神经网络的学习过程</h2>
+<h3 id="前提">前提</h3>
+<p>神经网络存在合适的权重和偏置，调整权重和偏置以便拟合训练数据的过程称为“学习”。神经网络的学习分成下面4个步骤。</p>
+<h3 id="步骤1（mini-batch）">步骤1（mini-batch）</h3>
+<p>从训练数据中随机选出一部分数据，这部分数据称为mini-batch。我们的目标是减小mini-batch的损失函数的值。</p>
+<h3 id="步骤2（计算梯度）">步骤2（计算梯度）</h3>
+<p>为了减小mini-batch的损失函数的值，需要求出各个权重参数的梯度。 梯度表示损失函数的值减小最多的方向。</p>
+<h3 id="步骤3（更新参数）">步骤3（更新参数）</h3>
+<p>将权重参数沿梯度方向进行微小更新。</p>
+<h3 id="步骤4（重复）">步骤4（重复）</h3>
+<p>重复步骤1、步骤2、步骤3。</p>
+<h2 id="Logistic-Regression-cost-function">Logistic Regression cost function</h2>
+<p>$$<br>
+\hat{y}=\sigma(w^Tx+b),where\ \sigma(z)=\frac{1}{1+e^{-z}}<br>
+$$</p>
+<p>Loss function:通常采用$L(\hat{y},y)=\frac{1}{2}(\hat{y}-y)^2$作为loss function，在逻辑回归中不这么做，因为其对梯度下降法很可能找不到全局最优值</p>
+<p>我们采用的是对数损失函数$L(\hat{y},y)=-(ylog\hat{y}+(1-y)log(1-\hat{y}))$，它是一个凸函数</p>
+<p>Cost function:$J(w,b)=\frac{1}{m}\sum{_{i=1}^mL(\hat{y}^{(i)},y^{(i)})}$</p>
+]]></content>
+      <tags>
+        <tag>深度学习</tag>
       </tags>
   </entry>
   <entry>
@@ -705,6 +759,36 @@ lowbit(x) = x &amp; (-x)<br>
       </tags>
   </entry>
   <entry>
+    <title>Self-Attention</title>
+    <url>//2026/02/14/Self-Attention/</url>
+    <content><![CDATA[<h1 id="Self-Attention">Self-Attention</h1>
+<h2 id="核心公式">核心公式</h2>
+<p>$$<br>
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V<br>
+$$</p>
+<h2 id="来源">来源</h2>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00c0.png" alt="自注意力模型的运作方式"></p>
+<p>我们要通过考虑一整串输入的向量来得到输出，每个$b$都是考虑了所有$a$之后产生的。以$b^1$为例，我们来介绍这个过程。</p>
+<p>自注意力的目的是考虑整个序列，但是又不希望把整个序列的所有信息包在一个窗口里，所以有一个特别的机制，用$\alpha$来判断每个向量与$a^1$的关联程度</p>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bc.png" alt="计算向量关联程度的方法"></p>
+<p>两个向量点积的结果在某种程度上可以反映两个向量的相似度。如图(a)方式，把输入的两个向量分别乘上两个不同的矩阵$W^q$、$W^k$，得到两个向量$q$和$k$，再把$q$和$k$做点积，把他们做逐元素的相乘，求和后就得到了$\alpha$。这是计算$\alpha$的一种方法，也是目前最常用的一种方法，另一种计算方式见图(b)</p>
+<p>将各个向量的关联性计算出之后（一般自己与自己也会计算关联性）,除以$\sqrt{d_k}$(防止$QK^T$数值过大softmax梯度消失)，对所有的关联性做一个softmax操作，即$\alpha’<em>{1,i} = \exp(\alpha</em>{1,i}) / \sum_{j} \exp(\alpha_{1,j})$得到$a’$</p>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00be.png" alt="添加softmax"></p>
+<p>接下来我们要根据$\alpha’$，去抽取出序列里面重要的信息。把向量$a^1$到$a^4$乘上$W^v$得到新的向量$v^1$到$v^4$，乘上对应的注意力分数$\alpha’$，求和，即$b^1=\sum_ia’_{1,i}v^i$,就得到了对应的b</p>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bf.png" alt="根据α′抽取序列中重要的信息"></p>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bd.png" alt="从矩阵乘法的角度来理解注意力"></p>
+<h2 id="位置编码">位置编码</h2>
+<p>需要考虑位置信息时，就要用到位置编码。位置编码为每一个位置设定一个位置向量，用$e^i$表示，上标$i$代表位置，不同的位置就有不同的向量<img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bb.png" alt="位置编码"></p>
+<h2 id="进阶版本">进阶版本</h2>
+<p>多头自注意力（multi-head self-attention）</p>
+<p>相关有很多种不同的形式，所以也许可以有多个$q$，不同的$q$负责不同种类的相关性<img src="https://pic1.imgdb.cn/item/6990887c92498366b1aa00c5.png" alt="多头自注意力的计算过程"></p>
+<p>截断自注意力（truncated self-attention）可以处理向量序列长度过大的问题。<img src="https://pic1.imgdb.cn/item/6990887c92498366b1aa00c6.png" alt="截断自注意力"></p>
+]]></content>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>深度神经网络DNN部分原理</title>
     <url>//2026/02/12/DNN/</url>
     <content><![CDATA[<h1 id="DNN">DNN</h1>
@@ -845,60 +929,6 @@ $$</p>
       </tags>
   </entry>
   <entry>
-    <title>DL基础</title>
-    <url>//2026/02/13/baseDL/</url>
-    <content><![CDATA[<h2 id="激活函数">激活函数</h2>
-<p>$g’(z)=g(z)(1-g(z))$<img src="https://pic1.imgdb.cn/item/698f3affe887663d376fdb91.png" alt="sigmoid"></p>
-<p>tanh：$g(z)=tanh(z)=a=\frac{e^z-e^{-z}}{e^z+e^{-z}}$,$g’(z)=(1-g^2(z))$<img src="https://pic1.imgdb.cn/item/698f3affe887663d376fdb8f.png" alt="tanh"></p>
-<p>ReLU:$g(z)=a=max(0,z)$<img src="https://pic1.imgdb.cn/item/698f3affe887663d376fdb90.png" alt="ReLU"></p>
-<p>leaky ReLU:$a=max(0.01z,z)$<img src="https://pic1.imgdb.cn/item/698f3afee887663d376fdb8e.png" alt="leaky ReLU"></p>
-<h2 id="损失函数">损失函数</h2>
-<p>常见的损失函数有均方误差和交叉熵误差</p>
-<h3 id="均方误差-MSE">均方误差(MSE)</h3>
-<p><strong>公式</strong>：$E = \frac{1}{2} \sum_{k}(y_k - t_k)^2$，其中$y_k$表示神经网络的输出，$t_k$表示监督数据，k表示数据的维数。</p>
-<p><strong>python实现</strong>：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">mean_squared_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0.5</span> * np.<span class="built_in">sum</span>((y-t)**<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="交叉熵误差">交叉熵误差</h3>
-<p><strong>公式</strong>：$E = -\sum_{k} t_k \log y_k$</p>
-<p><strong>python实现：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cross_entropy_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    delta = <span class="number">1e-7</span></span><br><span class="line">    <span class="keyword">return</span> -np.<span class="built_in">sum</span>(t * np.log(y + delta))</span><br></pre></td></tr></table></figure>
-<p>这里，参数y和t是NumPy数组。函数内部在计算np.log时，加上了一个微小值delta。这是因为，当出现np.log(0)时，np.log(0)会变为负无限大的-inf，这样一来就会导致后续计算无法进行。作为保护性对策，添加一个微小值可以防止负无限大的发生。</p>
-<h2 id="one-hot编码">one-hot编码</h2>
-<p>将正确解标签表示为1，其他标签表示为0的表示方法称为<strong>one-hot编码</strong></p>
-<h2 id="mini-batch">mini-batch</h2>
-<p>神经网络的学习也是从训练数据中选出一批数据，然后对每个mini-batch进行学习。比如，从60000个训练数据中随机选择100笔，再用这100笔数据进行学习。这种学习方式称为<strong>mini-batch学习</strong>，同时，mini-batch的损失函数也是利用 一部分样本数据来近似地计算整体</p>
-<h3 id="mini-batch版交叉熵误差的实现">mini-batch版交叉熵误差的实现</h3>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cross_entropy_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    <span class="keyword">if</span> y.ndim == <span class="number">1</span>:</span><br><span class="line">        t = t.reshape(<span class="number">1</span>, t.size)</span><br><span class="line">        y = y.reshape(<span class="number">1</span>, y.size)</span><br><span class="line">    batch_size = y.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> -np.<span class="built_in">sum</span>(t * np.log(y + <span class="number">1e-7</span>)) / batch_size</span><br></pre></td></tr></table></figure>
-<p>当监督数据是标签形式（非one-hot表示，而是像“2”“ 7”这样的标签）时，交叉熵误差可通过如下代码实现。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cross_entropy_error</span>(<span class="params">y, t</span>):</span><br><span class="line">    <span class="keyword">if</span> y.ndim == <span class="number">1</span>:</span><br><span class="line">        t = t.reshape(<span class="number">1</span>, t.size)</span><br><span class="line">        y = y.reshape(<span class="number">1</span>, y.size)</span><br><span class="line">    batch_size = y.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> -np.<span class="built_in">sum</span>(np.log(y[np.arange(batch_size), t] + <span class="number">1e-7</span>)) / batch_size</span><br></pre></td></tr></table></figure>
-<p>实现的要点是，由于one-hot表示中t为0的元素的交叉熵误差也为0，因 此针对这些元素的计算可以忽略。换言之，如果可以获得神经网络在正确解标签处的输出，就可以计算交叉熵误差。因此，t为one-hot表示时通过 t * np.log(y) 计算的地方，在t为标签形式时，可用np.log( y[np.arange  (batch_size), t] )实现相同的处理</p>
-<h2 id="梯度法">梯度法</h2>
-<p>通过使用梯度来寻找函数最小值（或者尽可能小的值）的方法，即通过不断地沿梯度方向前进， 逐渐减小函数值的过程，常见的参数更新公式$x_0 = x_0 - \eta \frac{\partial f}{\partial x_0}$、$x_1 = x_1 - \eta \frac{\partial f}{\partial x_1}$就来自于此</p>
-<p>通过梯度下降法更新参数，并且当使用的数据是随机选择的mini batch数据时，称该方法为随机梯度下降法(SGD)</p>
-<h2 id="神经网络的学习过程">神经网络的学习过程</h2>
-<h3 id="前提">前提</h3>
-<p>神经网络存在合适的权重和偏置，调整权重和偏置以便拟合训练数据的过程称为“学习”。神经网络的学习分成下面4个步骤。</p>
-<h3 id="步骤1（mini-batch）">步骤1（mini-batch）</h3>
-<p>从训练数据中随机选出一部分数据，这部分数据称为mini-batch。我们的目标是减小mini-batch的损失函数的值。</p>
-<h3 id="步骤2（计算梯度）">步骤2（计算梯度）</h3>
-<p>为了减小mini-batch的损失函数的值，需要求出各个权重参数的梯度。 梯度表示损失函数的值减小最多的方向。</p>
-<h3 id="步骤3（更新参数）">步骤3（更新参数）</h3>
-<p>将权重参数沿梯度方向进行微小更新。</p>
-<h3 id="步骤4（重复）">步骤4（重复）</h3>
-<p>重复步骤1、步骤2、步骤3。</p>
-<h2 id="Logistic-Regression-cost-function">Logistic Regression cost function</h2>
-<p>$$<br>
-\hat{y}=\sigma(w^Tx+b),where\ \sigma(z)=\frac{1}{1+e^{-z}}<br>
-$$</p>
-<p>Loss function:通常采用$L(\hat{y},y)=\frac{1}{2}(\hat{y}-y)^2$作为loss function，在逻辑回归中不这么做，因为其对梯度下降法很可能找不到全局最优值</p>
-<p>我们采用的是对数损失函数$L(\hat{y},y)=-(ylog\hat{y}+(1-y)log(1-\hat{y}))$，它是一个凸函数</p>
-<p>Cost function:$J(w,b)=\frac{1}{m}\sum{_{i=1}^mL(\hat{y}^{(i)},y^{(i)})}$</p>
-]]></content>
-      <tags>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>面向竞赛的C++STL</title>
     <url>/2025/01/25/Basic-STL/</url>
     <content><![CDATA[<h1 id="面向竞赛的-C-STL-介绍">面向竞赛的 C++ STL 介绍</h1>
@@ -1011,87 +1041,6 @@ $$</p>
       <tags>
         <tag>算法</tag>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2025/01/20/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start">Quick Start</h2>
-<h3 id="Create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>前缀和与差分</title>
-    <url>//2025/02/05/prefix-sum-and-difference/</url>
-    <content><![CDATA[<p>要对原数组a[N]进行修改与查询，需要用到前缀和数组和差分数组<br>
-diff求和——&gt;a 求和——&gt;prefix</p>
-<p>diff&lt;——a差分&lt;——prefix差分</p>
-<h1 id="一维前缀和与差分">一维前缀和与差分</h1>
-<h2 id="前缀和">前缀和</h2>
-<p>前缀和可用于求指定区间的和</p>
-<ol>
-<li><strong>求出前缀和数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">前缀和数组的计算:prefix[i] = prefix[i<span class="number">-1</span>] + arr[i] (此处及下文写法i均从<span class="number">1</span>开始，以防止越界问题)</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>得出区间和</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">由前缀和的可加性:sum[<span class="number">1</span>,k] + sum[k<span class="number">+1</span>,n] = sum[<span class="number">1</span>,n]</span><br><span class="line">得到sum[l,r] = sum[<span class="number">1</span>,r] - sum[<span class="number">1</span>,l<span class="number">-1</span>]，即sum=prefix[r]-prefix[l<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
-<h2 id="差分">差分</h2>
-<p>差分可用于修改指定区间的值</p>
-<ol>
-<li><strong>求出差分数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[i] = a[i] - a[i<span class="number">-1</span>]，它具有两个性质，一是可以通过求和得到a[i]，二是可以对后缀区间进行修改</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>对指定区间[l,r]的值进行修改</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[l] += x;</span><br><span class="line">diff[r + <span class="number">1</span>] -= x;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[i] = a[i<span class="number">-1</span>] + diff[i]</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="二维前缀和与差分">二维前缀和与差分</h1>
-<p><strong>利用数形结合</strong>，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
-<h2 id="前缀和-2">前缀和</h2>
-<ol>
-<li><strong>求出前缀和数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        prefix[i][j] = prefix[i<span class="number">-1</span>][j] + prefix[i][j<span class="number">-1</span>] - prefix[i<span class="number">-1</span>][j<span class="number">-1</span>] + arr[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>得出区间和</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">对于指定区间，设左上角为(x1, y1)，右下角为(x2, y2)</span><br><span class="line">sum = prefix[x2][y2] - prefix[x2][y1<span class="number">-1</span>] - prefix[x1<span class="number">-1</span>][y2] + prefix[x1<span class="number">-1</span>][y1<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
-<h2 id="差分-2">差分</h2>
-<ol>
-<li><strong>求出差分数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        d[i][j] = arr[i][j] - arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j] + arr[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">&#123;d[i][j] += a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j] -= a[i][j];</span><br><span class="line">d[i][j + <span class="number">1</span>] -= a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j + <span class="number">1</span>] += a[i][j];&#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><strong>对指定区间[(x1,y1),(x2,y2)]的值进行修改</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">d[x1][y1] += c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">d[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        arr[i][j] = arr[i<span class="number">-1</span>][j] + arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j<span class="number">-1</span>] + d[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-]]></content>
-      <tags>
-        <tag>算法</tag>
       </tags>
   </entry>
   <entry>
@@ -1220,5 +1169,86 @@ diff求和——&gt;a 求和——&gt;prefix</p>
       <tags>
         <tag>Markdown</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>前缀和与差分</title>
+    <url>//2025/02/05/prefix-sum-and-difference/</url>
+    <content><![CDATA[<p>要对原数组a[N]进行修改与查询，需要用到前缀和数组和差分数组<br>
+diff求和——&gt;a 求和——&gt;prefix</p>
+<p>diff&lt;——a差分&lt;——prefix差分</p>
+<h1 id="一维前缀和与差分">一维前缀和与差分</h1>
+<h2 id="前缀和">前缀和</h2>
+<p>前缀和可用于求指定区间的和</p>
+<ol>
+<li><strong>求出前缀和数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">前缀和数组的计算:prefix[i] = prefix[i<span class="number">-1</span>] + arr[i] (此处及下文写法i均从<span class="number">1</span>开始，以防止越界问题)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>得出区间和</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">由前缀和的可加性:sum[<span class="number">1</span>,k] + sum[k<span class="number">+1</span>,n] = sum[<span class="number">1</span>,n]</span><br><span class="line">得到sum[l,r] = sum[<span class="number">1</span>,r] - sum[<span class="number">1</span>,l<span class="number">-1</span>]，即sum=prefix[r]-prefix[l<span class="number">-1</span>]</span><br></pre></td></tr></table></figure>
+<h2 id="差分">差分</h2>
+<p>差分可用于修改指定区间的值</p>
+<ol>
+<li><strong>求出差分数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[i] = a[i] - a[i<span class="number">-1</span>]，它具有两个性质，一是可以通过求和得到a[i]，二是可以对后缀区间进行修改</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>对指定区间[l,r]的值进行修改</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">diff[l] += x;</span><br><span class="line">diff[r + <span class="number">1</span>] -= x;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">a[i] = a[i<span class="number">-1</span>] + diff[i]</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="二维前缀和与差分">二维前缀和与差分</h1>
+<p><strong>利用数形结合</strong>，前缀和可认为是数组向前拓展/向前的射线涉及的区间的和，差分可认为是数组向后拓展/向后的射线涉及的区间的修改</p>
+<h2 id="前缀和-2">前缀和</h2>
+<ol>
+<li><strong>求出前缀和数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        prefix[i][j] = prefix[i<span class="number">-1</span>][j] + prefix[i][j<span class="number">-1</span>] - prefix[i<span class="number">-1</span>][j<span class="number">-1</span>] + arr[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>得出区间和</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">对于指定区间，设左上角为(x1, y1)，右下角为(x2, y2)</span><br><span class="line">sum = prefix[x2][y2] - prefix[x2][y1<span class="number">-1</span>] - prefix[x1<span class="number">-1</span>][y2] + prefix[x1<span class="number">-1</span>][y1<span class="number">-1</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="差分-2">差分</h2>
+<ol>
+<li><strong>求出差分数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        d[i][j] = arr[i][j] - arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j] + arr[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">&#123;d[i][j] += a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j] -= a[i][j];</span><br><span class="line">d[i][j + <span class="number">1</span>] -= a[i][j];</span><br><span class="line">d[i + <span class="number">1</span>][j + <span class="number">1</span>] += a[i][j];&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>对指定区间[(x1,y1),(x2,y2)]的值进行修改</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">d[x1][y1] += c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">d[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">d[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>求出diff的前缀和数组，得到修改后的数组</strong></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">        arr[i][j] = arr[i<span class="number">-1</span>][j] + arr[i][j<span class="number">-1</span>] - arr[i<span class="number">-1</span>][j<span class="number">-1</span>] + d[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2025/01/20/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start">Quick Start</h2>
+<h3 id="Create-a-new-post">Create a new post</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server">Run server</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files">Generate static files</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
   </entry>
 </search>
