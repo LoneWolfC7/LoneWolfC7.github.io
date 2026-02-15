@@ -1,27 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>单调栈与单调队列</title>
-    <url>//2025/02/12/monotone-stack-and-queue/</url>
-    <content><![CDATA[<p>单调栈与单调队列一般存在以下三种形式：存值，存下标，数组实现，数组实现的优点在于在清空栈时只需top&#x3D;0即可</p>
-<h1 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h1><p>伪代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for(i=1-&gt;n)//n为元素数量</span><br><span class="line">&#123;</span><br><span class="line">    ① while(栈非空且入栈元素优于栈顶元素)栈顶出栈//维持栈的单调性</span><br><span class="line">    //while结束的两种可能的判断</span><br><span class="line">    ② 如果(栈顶元素优于入栈元素)更新一次答案，此时栈顶即为最优解</span><br><span class="line">    否则 不存在答案</span><br><span class="line">    ③ 将新元素入栈</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>eg:输入n个数字 输出每个数字左侧距离该数字最近的比它小的元素，不存在则输出-1</strong><br>in      5<br>        7 8 5 6 7<br>out     -1 7 -1 5 6</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//存值</span></span><br><span class="line"><span class="type">int</span> a[N],ans[N];<span class="comment">//a[N]用来存放输入的数字，ans[N]用于存放答案</span></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; stk;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(stk.<span class="built_in">size</span>()&amp;&amp;stk.top&gt;=a[i])stk.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="keyword">if</span>(stk.<span class="built_in">empty</span>())ans[i]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> ans[i]=stk.<span class="built_in">top</span>();</span><br><span class="line">    stk.<span class="built_in">push</span>(a[i]);</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;   </span><br><span class="line"><span class="comment">//存下标＋数组实现</span></span><br><span class="line"><span class="type">int</span> a[N],stk[N],ans[N],top;<span class="comment">//stk数组用来模拟下标</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(top&amp;&amp;a[stk[top]]&gt;=a[i])top--;</span><br><span class="line">    <span class="keyword">if</span>(top) ans[i]=a[stk[top]];</span><br><span class="line">    <span class="keyword">else</span> ans[i]=<span class="number">-1</span>;</span><br><span class="line">    stk[++top]=i;</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h1><p>通过deque实现，在队头进行出队操作，在队尾进行入队和出队操作，最典型的是用于处理滑动窗口<br>伪代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for(i=1-&gt;n)</span><br><span class="line">&#123;</span><br><span class="line">    ① while(非空且队头不合法)弹出头//队头合法性</span><br><span class="line">    while(非空且i优于队尾)弹出尾//队尾优越性</span><br><span class="line">    ② 将i入队</span><br><span class="line">    ③ 此时队头为最优</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://www.luogu.com.cn/problem/P1886"><em><strong>例题</strong></em></a></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//deque存下标实现</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//滑动窗口的区间为[i-k+1,i]</span></span><br><span class="line">    <span class="keyword">while</span> (dq.<span class="built_in">size</span>() &amp;&amp; dq.<span class="built_in">front</span>() &lt; i - k + <span class="number">1</span>)dq.<span class="built_in">pop_front</span>();</span><br><span class="line">    <span class="keyword">while</span> (dq.<span class="built_in">size</span>() &amp;&amp; a[i]&lt;= a[dq.<span class="built_in">back</span>()])dq.<span class="built_in">pop_back</span>();</span><br><span class="line">    dq.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="comment">//当第一个滑动窗口开始形成时，开始输出答案</span></span><br><span class="line">    <span class="keyword">if</span> (i &gt;= k)cout &lt;&lt; a[dq.<span class="built_in">front</span>()] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>#TODO 数组模拟</p>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>图</title>
     <url>//2025/02/12/graph/</url>
     <content><![CDATA[<h1 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h1><p>图(G)是由顶点集(V)和边集(E)组成的有序对，G&#x3D;(V,E)，可以用|V|，|E|表示图中的顶点数量和边数量<br>图既可以是有向的，即单向链接，也可以是无向的，即双向链接。<br>只包含有向边的图称为有向图，只包含无向边的图称为无向图<br>若边关联了权重&#x2F;成本，则叫做权重图，反之叫做非权重图</p>
@@ -162,6 +141,46 @@
 <h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>原理也很简单，执行bat里的命令时，默认会把要执行的命令显示到终端上，echo off 是取消命令的回显，@的作用是将echo off这行命令的回显也取消掉，%*是用来接受参数(jnb test.ipynb&#x3D;jupyter notebook test.ipynb)，所以运行时会执行”jupyter notebook %*”的命令，等同于在终端上输入了jupyter notebook。</p>
 <hr>
 <p>破案了，直接配vscode+jupyter更简单 </p>
+]]></content>
+      <tags>
+        <tag>Jupyter notebook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>单调栈与单调队列</title>
+    <url>//2025/02/12/monotone-stack-and-queue/</url>
+    <content><![CDATA[<p>单调栈与单调队列一般存在以下三种形式：存值，存下标，数组实现，数组实现的优点在于在清空栈时只需top&#x3D;0即可</p>
+<h1 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h1><p>伪代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for(i=1-&gt;n)//n为元素数量</span><br><span class="line">&#123;</span><br><span class="line">    ① while(栈非空且入栈元素优于栈顶元素)栈顶出栈//维持栈的单调性</span><br><span class="line">    //while结束的两种可能的判断</span><br><span class="line">    ② 如果(栈顶元素优于入栈元素)更新一次答案，此时栈顶即为最优解</span><br><span class="line">    否则 不存在答案</span><br><span class="line">    ③ 将新元素入栈</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>eg:输入n个数字 输出每个数字左侧距离该数字最近的比它小的元素，不存在则输出-1</strong><br>in      5<br>        7 8 5 6 7<br>out     -1 7 -1 5 6</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//存值</span></span><br><span class="line"><span class="type">int</span> a[N],ans[N];<span class="comment">//a[N]用来存放输入的数字，ans[N]用于存放答案</span></span><br><span class="line">stack&lt;<span class="type">int</span>&gt; stk;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(stk.<span class="built_in">size</span>()&amp;&amp;stk.top&gt;=a[i])stk.<span class="built_in">pop</span>();</span><br><span class="line">    <span class="keyword">if</span>(stk.<span class="built_in">empty</span>())ans[i]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span> ans[i]=stk.<span class="built_in">top</span>();</span><br><span class="line">    stk.<span class="built_in">push</span>(a[i]);</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;   </span><br><span class="line"><span class="comment">//存下标＋数组实现</span></span><br><span class="line"><span class="type">int</span> a[N],stk[N],ans[N],top;<span class="comment">//stk数组用来模拟下标</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)cin&gt;&gt;a[i];</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">while</span>(top&amp;&amp;a[stk[top]]&gt;=a[i])top--;</span><br><span class="line">    <span class="keyword">if</span>(top) ans[i]=a[stk[top]];</span><br><span class="line">    <span class="keyword">else</span> ans[i]=<span class="number">-1</span>;</span><br><span class="line">    stk[++top]=i;</span><br><span class="line">    cout&lt;&lt;ans[i]&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h1><p>通过deque实现，在队头进行出队操作，在队尾进行入队和出队操作，最典型的是用于处理滑动窗口<br>伪代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">for(i=1-&gt;n)</span><br><span class="line">&#123;</span><br><span class="line">    ① while(非空且队头不合法)弹出头//队头合法性</span><br><span class="line">    while(非空且i优于队尾)弹出尾//队尾优越性</span><br><span class="line">    ② 将i入队</span><br><span class="line">    ③ 此时队头为最优</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.luogu.com.cn/problem/P1886"><em><strong>例题</strong></em></a></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//deque存下标实现</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//滑动窗口的区间为[i-k+1,i]</span></span><br><span class="line">    <span class="keyword">while</span> (dq.<span class="built_in">size</span>() &amp;&amp; dq.<span class="built_in">front</span>() &lt; i - k + <span class="number">1</span>)dq.<span class="built_in">pop_front</span>();</span><br><span class="line">    <span class="keyword">while</span> (dq.<span class="built_in">size</span>() &amp;&amp; a[i]&lt;= a[dq.<span class="built_in">back</span>()])dq.<span class="built_in">pop_back</span>();</span><br><span class="line">    dq.<span class="built_in">push_back</span>(i);</span><br><span class="line">    <span class="comment">//当第一个滑动窗口开始形成时，开始输出答案</span></span><br><span class="line">    <span class="keyword">if</span> (i &gt;= k)cout &lt;&lt; a[dq.<span class="built_in">front</span>()] &lt;&lt; <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#TODO 数组模拟</p>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Jupyter7下的翻译问题的解决</title>
+    <url>//2025/08/15/Jupyter7-translation-fix/</url>
+    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>jnb更新到7版本后，不少nbextension也随之失效，其中当然包括nbtranslate，</p>
+<p>尽管jnb7是基于jlab的，有着jlab的扩展支持，但其中也没有翻译方面的扩展。</p>
+<p>但不得不面对的是，不少ipynb是英文版本的，有些时候必然会造成困扰</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p><del>提升英语水平，写一个python脚本，亦或者降级到jnb6()</del></p>
+<p>大模型时代当然要使用大模型，可以直接将文件喂给大模型，但是不氪金会受到点限制<br>寻找solution时，逛到jnb的侧栏ai agent，感觉很是方便，而且模型能自己选择，缺点是不氪金一个月只能对话50次（<del>可以换着号来用</del>），但是只用来翻译够用了</p>
+<p>下面呈现方法</p>
+<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip install runcell</span><br></pre></td></tr></table></figure>
+
+<p>在查看(View)-右侧边栏(Right Sidebar)-show打开，用github&#x2F;google登录即可</p>
+<hr>
+<p>破案了，直接vscode+jupyter+copilot完事</p>
 ]]></content>
       <tags>
         <tag>Jupyter notebook</tag>
@@ -688,6 +707,61 @@
       </tags>
   </entry>
   <entry>
+    <title>Self-Attention</title>
+    <url>//2026/02/14/Self-Attention/</url>
+    <content><![CDATA[<h1 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h1><h2 id="核心公式"><a href="#核心公式" class="headerlink" title="核心公式"></a>核心公式</h2><p>$$<br>\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V<br>$$</p>
+<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00c0.png" alt="自注意力模型的运作方式"></p>
+<p>我们要通过考虑一整串输入的向量来得到输出，每个$b$都是考虑了所有$a$之后产生的。以$b^1$为例，我们来介绍这个过程。</p>
+<p>自注意力的目的是考虑整个序列，但是又不希望把整个序列的所有信息包在一个窗口里，所以有一个特别的机制，用$\alpha$来判断每个向量与$a^1$的关联程度</p>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bc.png" alt="计算向量关联程度的方法"></p>
+<p>两个向量点积的结果在某种程度上可以反映两个向量的相似度。如图(a)方式，把输入的两个向量分别乘上两个不同的矩阵$W^q$、$W^k$，得到两个向量$q$和$k$，再把$q$和$k$做点积，把他们做逐元素的相乘，求和后就得到了$\alpha$。这是计算$\alpha$的一种方法，也是目前最常用的一种方法，另一种计算方式见图(b)</p>
+<p>将各个向量的关联性计算出之后（一般自己与自己也会计算关联性）,除以$\sqrt{d_k}$(防止$QK^T$数值过大softmax梯度消失)，对所有的关联性做一个softmax操作，即$\alpha\prime_{1,i} &#x3D; e^{\alpha_{1,i}} &#x2F; \sum_{j} e^{\alpha_{1,j}}$ ,得到 $a\prime$</p>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00be.png" alt="添加softmax"></p>
+<p>接下来我们要根据$\alpha’$，去抽取出序列里面重要的信息。把向量$a^1$到$a^4$乘上$W^v$得到新的向量$v^1$到$v^4$，乘上对应的注意力分数$\alpha’$，求和，即$b^1&#x3D;\sum_ia’_{1,i}v^i$,就得到了对应的b</p>
+<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bf.png" alt="根据α′抽取序列中重要的信息"><br>将上述过程向量化后，即得到了Self-Attention的核心公式<br><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bd.png" alt="从矩阵乘法的角度来理解注意力"></p>
+<h2 id="位置编码"><a href="#位置编码" class="headerlink" title="位置编码"></a>位置编码</h2><p>需要考虑位置信息时，就要用到位置编码。位置编码为每一个位置设定一个位置向量，用$e^i$表示，上标$i$代表位置，不同的位置就有不同的向量<img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bb.png" alt="位置编码"></p>
+<h2 id="进阶版本"><a href="#进阶版本" class="headerlink" title="进阶版本"></a>进阶版本</h2><p>多头自注意力（multi-head self-attention）</p>
+<p>相关有很多种不同的形式，所以也许可以有多个$q$，不同的$q$负责不同种类的相关性<img src="https://pic1.imgdb.cn/item/6990887c92498366b1aa00c5.png" alt="多头自注意力的计算过程"></p>
+<p>截断自注意力（truncated self-attention）可以处理向量序列长度过大的问题。<img src="https://pic1.imgdb.cn/item/6990887c92498366b1aa00c6.png" alt="截断自注意力"></p>
+]]></content>
+      <tags>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>循环神经网络RNN部分原理</title>
+    <url>//2026/02/15/RNN/</url>
+    <content><![CDATA[<h1 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h1><h2 id="什么是RNN？"><a href="#什么是RNN？" class="headerlink" title="什么是RNN？"></a>什么是RNN？</h2><p>隐藏层的输出会被保留在记忆元中，在处理下一次的输入时，记忆元中的值也会被考虑。它会考虑序列的顺序，输入序列的顺序不同输出也不同。下图为权重为1，偏置为0，激活函数为线性的RNN架构处理输入序列$[1,1]^T,[1,1]^T,[2,2]^T$的情况</p>
+<p><img src="/2026/02/15/RNN/image-20260215111432342.png" alt="循环神经网络运算示例"></p>
+<h2 id="其他RNN"><a href="#其他RNN" class="headerlink" title="其他RNN"></a>其他RNN</h2><p>循环神经网络的架构是可以任意设计的，之前提到的RNN只有一个隐藏层，但RNN也可以是深层的。</p>
+<p><img src="/2026/02/15/RNN/image-20260215112252727.png" alt="深层循环神经网络"></p>
+<h3 id="Elman-网络-Jordan-网络"><a href="#Elman-网络-Jordan-网络" class="headerlink" title="Elman 网络 &amp;Jordan 网络"></a>Elman 网络 &amp;Jordan 网络</h3><p>Jordan 网络存的是整个网络输出的值，它把输出值在下一个时间点在读进来，把输出存到记忆元里。Elman网络没有目标，很难控制说它能学到什么隐藏层信息（学到什么放到记忆元里），但是Jordan网络是有目标，比较很清楚记忆元存储的东西。</p>
+<p><img src="/2026/02/15/RNN/image-20260215112312814.png" alt="Elman 网络和 Jordan 网络"></p>
+<h3 id="双向循环神经网络Bi-RNN"><a href="#双向循环神经网络Bi-RNN" class="headerlink" title="双向循环神经网络Bi-RNN"></a>双向循环神经网络Bi-RNN</h3><p>同时训练一个正向的循环神经网络，训练一个逆向的循环神经网络，然后把这两个循环神经网络的隐藏层拿出来，都接给一个输出层得到最后的$y_t$。它的好处是神经元产生输出的时候，考虑的范围是比较广的<img src="/2026/02/15/RNN/image-20260215112742532.png" alt="双向循环神经网络"></p>
+<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM有三个<strong>门</strong>，负责控制是否输入、清除记忆和输出</p>
+<p>**输入门：**输入门被打开时，才能把输入值写入记忆元</p>
+<p>**输出门：**输出门被打开时，外界的神经元才能把记忆元的内容读取出来</p>
+<p>**遗忘门：**遗忘门决定什么时候将记忆元的东西遗忘。当遗忘门被打开时，将输入与记忆元内容进行计算后存入记忆元。当遗忘门被关闭时，清除记忆元的内容。记忆元对应的计算公式为$c\prime &#x3D; g(z)f(z_i)+cf(z_f)$</p>
+<p><img src="/2026/02/15/RNN/image-20260215114426951.png" alt="LSTM 记忆元示例"></p>
+<p>假设要被存到单元的输入为$z$，操控输入门的信号为$z_i$，操控遗忘门的信号为$z_f$，操控输出门为$z_o$，综合这些会得到一个输出记为$a$。</p>
+<p>$z$通过激活函数得到$g(z)$，$z_i$通过激活函数f得到$f(z_i)$，f通常会选择sigmoid函数，因为其值介于0~1之间，可以表示门被打开的程度，如果f的输出是1，表示门被打开的状态，反之这个门是关起来的。接下来把$g(z)$乘$f(z_i)$得到$g(z)f(z_i)$。对于遗忘门的$z_f$，也是通过sigmoid函数得到$f(z_f)$，接下来把记忆元里的值$c$乘$f(z_f)$得到$cf(z_f)$，相加得到$c’&#x3D;g(z)f(z_i)+cf(z_f)$存入记忆元中。</p>
+<p><strong>LSTM原理</strong></p>
+<p>原来的神经网络里会有很多神经元，可以直接把LSTM当作一个神经元</p>
+<p><img src="/2026/02/15/RNN/image-20260215171137415.png" alt="LSTM 结构示意"></p>
+<p>假设用的神经元的数量跟LSTM是一样的，则LSTM需要的参数量是一般神经网络的四倍。</p>
+<p><img src="/2026/02/15/RNN/image-20260215171653840.png" alt="输入向量与记忆元的关系"></p>
+<p>如图，假设有一排LSTM，将所有LSTM的值连接起来就变成了向量，记作$c^{t-1}$，现在在时间节点$t$，输入向量$x_t$，这个向量首先会乘上一矩阵变成一个向量$z$。向量$z$就代表了每个LSTM的输入，z的维度刚好是LSTM的数量。将$x_t$进行另外一次变换得到$z_i$，$z_i$的维度也和LSTM单元的数量一样，$z_i$的每一个维度都会去操控输入门。输出门与遗忘门也是相同的道理。所以我们把$x_t$进行四次不同的变换得到四个不同的向量，四个向量的维度与LSTM的数量一样，把这些向量合起来就会去操控这些记忆元的运作。<img src="/2026/02/15/RNN/image-20260215172653498.png" alt="记忆元一起运算示例"></p>
+<p>完成该时间点的操作后，继续进行下一个时间点的运算。真正的LSTM还会把上个时间点输出值$h^t$接入当作下一个时间点的输入，并添加peephole连接，即把记忆元的值也拉过来。操控LSTM四个门的时候，同时考虑$x_{t+1},h^t,c^t$，把这三个向量并在一起经过变换得到四个不同的向量再去操控LSTM</p>
+<p><img src="/2026/02/15/RNN/image-20260215174132880.png" alt="LSTM完全体"></p>
+<p>LSTM 通常不会只有一层</p>
+<p><img src="/2026/02/15/RNN/image-20260215174306377.png" alt="多层LSTM">门控循环单元GRU是LSTM的简化版本，它只有两个门，但性能相近，少了1&#x2F;3的参数，不容易过拟合。</p>
+]]></content>
+      <tags>
+        <tag>深度学习</tag>
+        <tag>神经网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DL基础</title>
     <url>//2026/02/13/baseDL/</url>
     <content><![CDATA[<h2 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h2><p>$g’(z)&#x3D;g(z)(1-g(z))$<img src="https://pic1.imgdb.cn/item/698f3affe887663d376fdb91.png" alt="sigmoid"></p>
@@ -723,6 +797,28 @@
 <p>Loss function:通常采用$L(\hat{y},y)&#x3D;\frac{1}{2}(\hat{y}-y)^2$作为loss function，在逻辑回归中不这么做，因为其对梯度下降法很可能找不到全局最优值</p>
 <p>我们采用的是对数损失函数$L(\hat{y},y)&#x3D;-(ylog\hat{y}+(1-y)log(1-\hat{y}))$，它是一个凸函数</p>
 <p>Cost function:$J(w,b)&#x3D;\frac{1}{m}\sum{_{i&#x3D;1}^mL(\hat{y}^{(i)},y^{(i)})}$</p>
+<h2 id="层的思想在神经网络中的应用"><a href="#层的思想在神经网络中的应用" class="headerlink" title="层的思想在神经网络中的应用"></a>层的思想在神经网络中的应用</h2><p><strong>乘法层</strong>：正向传播计算乘积。反向传播会将上游传来的导数乘以“翻转值”（即正向传播时的另一个输入值）。需要保存正向传播时的输入变量。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MulLayer</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.x = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.y = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        <span class="variable language_">self</span>.x = x</span><br><span class="line">        <span class="variable language_">self</span>.y = y</span><br><span class="line">        <span class="keyword">return</span> x * y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, dout</span>):</span><br><span class="line">        <span class="comment"># 翻转x和y</span></span><br><span class="line">        dx = dout * <span class="variable language_">self</span>.y</span><br><span class="line">        dy = dout * <span class="variable language_">self</span>.x</span><br><span class="line">        <span class="keyword">return</span> dx, dy</span><br></pre></td></tr></table></figure>
+
+<p><strong>加法层</strong>：正向传播计算和。反向传播将上游导数原封不动地传递给下游（乘以1）。不需要保存输入变量。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AddLayer</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, y</span>):</span><br><span class="line">        <span class="keyword">return</span> x + y</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, dout</span>):</span><br><span class="line">        dx = dout * <span class="number">1</span></span><br><span class="line">        dy = dout * <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> dx, dy</span><br></pre></td></tr></table></figure>
+
+<p><strong>激活函数层</strong>：</p>
+<p>ReLU：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Relu</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.mask = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="variable language_">self</span>.mask = (x &lt;= <span class="number">0</span>)</span><br><span class="line">        out = x.copy()</span><br><span class="line">        out[<span class="variable language_">self</span>.mask] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, dout</span>):</span><br><span class="line">        dout[<span class="variable language_">self</span>.mask] = <span class="number">0</span></span><br><span class="line">        dx = dout</span><br><span class="line">        <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
+
+<p>Sigmoid：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sigmoid</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.out = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        out = <span class="number">1</span> / (<span class="number">1</span> + np.exp(-x))</span><br><span class="line">        <span class="variable language_">self</span>.out = out</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, dout</span>):</span><br><span class="line">        dx = dout * (<span class="number">1.0</span> - <span class="variable language_">self</span>.out) * <span class="variable language_">self</span>.out</span><br><span class="line">        <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
+
+<p>Affine：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Affine</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, W, b</span>):</span><br><span class="line">        <span class="variable language_">self</span>.W = W</span><br><span class="line">        <span class="variable language_">self</span>.b = b</span><br><span class="line">        <span class="variable language_">self</span>.x = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.dW = <span class="literal">None</span></span><br><span class="line">        <span class="variable language_">self</span>.db = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="variable language_">self</span>.x = x</span><br><span class="line">        out = np.dot(x, <span class="variable language_">self</span>.W) + <span class="variable language_">self</span>.b</span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, dout</span>):</span><br><span class="line">        dx = np.dot(dout, <span class="variable language_">self</span>.W.T)</span><br><span class="line">        <span class="variable language_">self</span>.dW = np.dot(<span class="variable language_">self</span>.x.T, dout)</span><br><span class="line">        <span class="variable language_">self</span>.db = np.<span class="built_in">sum</span>(dout, axis=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
+
+<p>Softmax-with-Loss：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SoftmaxWithLoss</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.loss = <span class="literal">None</span> <span class="comment"># 损失</span></span><br><span class="line">        <span class="variable language_">self</span>.y = <span class="literal">None</span>    <span class="comment"># softmax的输出</span></span><br><span class="line">        <span class="variable language_">self</span>.t = <span class="literal">None</span>    <span class="comment"># 监督数据（one-hot vector）</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, t</span>):</span><br><span class="line">        <span class="variable language_">self</span>.t = t</span><br><span class="line">        <span class="variable language_">self</span>.y = softmax(x)</span><br><span class="line">        <span class="variable language_">self</span>.loss = cross_entropy_error(<span class="variable language_">self</span>.y, <span class="variable language_">self</span>.t)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.loss</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backward</span>(<span class="params">self, dout=<span class="number">1</span></span>):</span><br><span class="line">        batch_size = <span class="variable language_">self</span>.t.shape[<span class="number">0</span>]</span><br><span class="line">        dx = (<span class="variable language_">self</span>.y - <span class="variable language_">self</span>.t) / batch_size</span><br><span class="line">        <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
+
+<p>应用：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> sys, os</span><br><span class="line">sys.path.append(os.pardir)</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> common.layers <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> common.gradient <span class="keyword">import</span> numerical_gradient</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TwoLayerNet</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, input_size, hidden_size, output_size,</span></span><br><span class="line"><span class="params">                 weight_init_std=<span class="number">0.01</span></span>):</span><br><span class="line">        <span class="comment"># </span></span><br><span class="line">初始化权重</span><br><span class="line">        <span class="variable language_">self</span>.params = &#123;&#125;</span><br><span class="line">        <span class="variable language_">self</span>.params[<span class="string">&#x27;W1&#x27;</span>] = weight_init_std * \</span><br><span class="line">                            np.random.randn(input_size, hidden_size)</span><br><span class="line">        <span class="variable language_">self</span>.params[<span class="string">&#x27;b1&#x27;</span>] = np.zeros(hidden_size)</span><br><span class="line">        <span class="variable language_">self</span>.params[<span class="string">&#x27;W2&#x27;</span>] = weight_init_std * \</span><br><span class="line">                            np.random.randn(hidden_size, output_size)</span><br><span class="line">        <span class="variable language_">self</span>.params[<span class="string">&#x27;b2&#x27;</span>] = np.zeros(output_size)</span><br><span class="line">        <span class="comment"># </span></span><br><span class="line">生成层</span><br><span class="line">        <span class="variable language_">self</span>.layers = OrderedDict()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;Affine1&#x27;</span>] = \</span><br><span class="line">            Affine(<span class="variable language_">self</span>.params[<span class="string">&#x27;W1&#x27;</span>], <span class="variable language_">self</span>.params[<span class="string">&#x27;b1&#x27;</span>])</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;Relu1&#x27;</span>] = Relu()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;Affine2&#x27;</span>] = \</span><br><span class="line">            Affine(<span class="variable language_">self</span>.params[<span class="string">&#x27;W2&#x27;</span>], <span class="variable language_">self</span>.params[<span class="string">&#x27;b2&#x27;</span>])</span><br><span class="line">        <span class="variable language_">self</span>.lastLayer = SoftmaxWithLoss()</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, x</span>):</span><br><span class="line">        <span class="keyword">for</span> layer <span class="keyword">in</span> <span class="variable language_">self</span>.layers.values():</span><br><span class="line">            x = layer.forward(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    <span class="comment"># x: 输入数据, t:监督数据</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">loss</span>(<span class="params">self, x, t</span>):</span><br><span class="line">        y = <span class="variable language_">self</span>.predict(x)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.lastLayer.forward(y, t)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">accuracy</span>(<span class="params">self, x, t</span>):</span><br><span class="line">        y = <span class="variable language_">self</span>.predict(x)</span><br><span class="line">        y = np.argmax(y, axis=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> t.ndim != <span class="number">1</span> : t = np.argmax(t, axis=<span class="number">1</span>)</span><br><span class="line">        accuracy = np.<span class="built_in">sum</span>(y == t) / <span class="built_in">float</span>(x.shape[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> accuracy</span><br><span class="line">    <span class="comment"># x: 输入数据, t:监督数据</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numerical_gradient</span>(<span class="params">self, x, t</span>):</span><br><span class="line">        loss_W = <span class="keyword">lambda</span> W: <span class="variable language_">self</span>.loss(x, t)</span><br><span class="line">        grads = &#123;&#125;</span><br><span class="line">        grads[<span class="string">&#x27;W1&#x27;</span>] = numerical_gradient(loss_W, <span class="variable language_">self</span>.params[<span class="string">&#x27;W1&#x27;</span>])</span><br><span class="line">        grads[<span class="string">&#x27;b1&#x27;</span>] = numerical_gradient(loss_W, <span class="variable language_">self</span>.params[<span class="string">&#x27;b1&#x27;</span>])</span><br><span class="line">        grads[<span class="string">&#x27;W2&#x27;</span>] = numerical_gradient(loss_W, <span class="variable language_">self</span>.params[<span class="string">&#x27;W2&#x27;</span>])</span><br><span class="line">        grads[<span class="string">&#x27;b2&#x27;</span>] = numerical_gradient(loss_W, <span class="variable language_">self</span>.params[<span class="string">&#x27;b2&#x27;</span>])</span><br><span class="line">        <span class="keyword">return</span> grads</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gradient</span>(<span class="params">self, x, t</span>):</span><br><span class="line">        <span class="comment"># forward</span></span><br><span class="line">        <span class="variable language_">self</span>.loss(x, t)</span><br><span class="line">        <span class="comment"># backward</span></span><br><span class="line">        dout = <span class="number">1</span></span><br><span class="line">        dout = <span class="variable language_">self</span>.lastLayer.backward(dout)</span><br><span class="line">        layers = <span class="built_in">list</span>(<span class="variable language_">self</span>.layers.values())</span><br><span class="line">        layers.reverse()</span><br><span class="line">        <span class="keyword">for</span> layer <span class="keyword">in</span> layers:</span><br><span class="line">            dout = layer.backward(dout)</span><br><span class="line">        <span class="comment"># 设定</span></span><br><span class="line">        grads = &#123;&#125;</span><br><span class="line">        grads[<span class="string">&#x27;W1&#x27;</span>] = <span class="variable language_">self</span>.layers[<span class="string">&#x27;Affine1&#x27;</span>].dW</span><br><span class="line">        grads[<span class="string">&#x27;b1&#x27;</span>] = <span class="variable language_">self</span>.layers[<span class="string">&#x27;Affine1&#x27;</span>].db</span><br><span class="line">        grads[<span class="string">&#x27;W2&#x27;</span>] = <span class="variable language_">self</span>.layers[<span class="string">&#x27;Affine2&#x27;</span>].dW</span><br><span class="line">        grads[<span class="string">&#x27;b2&#x27;</span>] = <span class="variable language_">self</span>.layers[<span class="string">&#x27;Affine2&#x27;</span>].db</span><br><span class="line">        <span class="keyword">return</span> grads</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
         <tag>深度学习</tag>
@@ -1019,47 +1115,6 @@
 ]]></content>
       <tags>
         <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Self-Attention</title>
-    <url>//2026/02/14/Self-Attention/</url>
-    <content><![CDATA[<h1 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self-Attention"></a>Self-Attention</h1><h2 id="核心公式"><a href="#核心公式" class="headerlink" title="核心公式"></a>核心公式</h2><p>$$<br>\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V<br>$$</p>
-<h2 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h2><p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00c0.png" alt="自注意力模型的运作方式"></p>
-<p>我们要通过考虑一整串输入的向量来得到输出，每个$b$都是考虑了所有$a$之后产生的。以$b^1$为例，我们来介绍这个过程。</p>
-<p>自注意力的目的是考虑整个序列，但是又不希望把整个序列的所有信息包在一个窗口里，所以有一个特别的机制，用$\alpha$来判断每个向量与$a^1$的关联程度</p>
-<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bc.png" alt="计算向量关联程度的方法"></p>
-<p>两个向量点积的结果在某种程度上可以反映两个向量的相似度。如图(a)方式，把输入的两个向量分别乘上两个不同的矩阵$W^q$、$W^k$，得到两个向量$q$和$k$，再把$q$和$k$做点积，把他们做逐元素的相乘，求和后就得到了$\alpha$。这是计算$\alpha$的一种方法，也是目前最常用的一种方法，另一种计算方式见图(b)</p>
-<p>将各个向量的关联性计算出之后（一般自己与自己也会计算关联性）,除以$\sqrt{d_k}$(防止$QK^T$数值过大softmax梯度消失)，对所有的关联性做一个softmax操作，即$\alpha\prime_{1,i} &#x3D; e^{\alpha_{1,i}} &#x2F; \sum_{j} e^{\alpha_{1,j}}$ ,得到 $a\prime$</p>
-<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00be.png" alt="添加softmax"></p>
-<p>接下来我们要根据$\alpha’$，去抽取出序列里面重要的信息。把向量$a^1$到$a^4$乘上$W^v$得到新的向量$v^1$到$v^4$，乘上对应的注意力分数$\alpha’$，求和，即$b^1&#x3D;\sum_ia’_{1,i}v^i$,就得到了对应的b</p>
-<p><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bf.png" alt="根据α′抽取序列中重要的信息"><br>将上述过程向量化后，即得到了Self-Attention的核心公式<br><img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bd.png" alt="从矩阵乘法的角度来理解注意力"></p>
-<h2 id="位置编码"><a href="#位置编码" class="headerlink" title="位置编码"></a>位置编码</h2><p>需要考虑位置信息时，就要用到位置编码。位置编码为每一个位置设定一个位置向量，用$e^i$表示，上标$i$代表位置，不同的位置就有不同的向量<img src="https://pic1.imgdb.cn/item/6990880a92498366b1aa00bb.png" alt="位置编码"></p>
-<h2 id="进阶版本"><a href="#进阶版本" class="headerlink" title="进阶版本"></a>进阶版本</h2><p>多头自注意力（multi-head self-attention）</p>
-<p>相关有很多种不同的形式，所以也许可以有多个$q$，不同的$q$负责不同种类的相关性<img src="https://pic1.imgdb.cn/item/6990887c92498366b1aa00c5.png" alt="多头自注意力的计算过程"></p>
-<p>截断自注意力（truncated self-attention）可以处理向量序列长度过大的问题。<img src="https://pic1.imgdb.cn/item/6990887c92498366b1aa00c6.png" alt="截断自注意力"></p>
-]]></content>
-      <tags>
-        <tag>深度学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Jupyter7下的翻译问题的解决</title>
-    <url>//2025/08/15/Jupyter7-translation-fix/</url>
-    <content><![CDATA[<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><p>jnb更新到7版本后，不少nbextension也随之失效，其中当然包括nbtranslate，</p>
-<p>尽管jnb7是基于jlab的，有着jlab的扩展支持，但其中也没有翻译方面的扩展。</p>
-<p>但不得不面对的是，不少ipynb是英文版本的，有些时候必然会造成困扰</p>
-<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><p><del>提升英语水平，写一个python脚本，亦或者降级到jnb6()</del></p>
-<p>大模型时代当然要使用大模型，可以直接将文件喂给大模型，但是不氪金会受到点限制<br>寻找solution时，逛到jnb的侧栏ai agent，感觉很是方便，而且模型能自己选择，缺点是不氪金一个月只能对话50次（<del>可以换着号来用</del>），但是只用来翻译够用了</p>
-<p>下面呈现方法</p>
-<figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">pip install runcell</span><br></pre></td></tr></table></figure>
-
-<p>在查看(View)-右侧边栏(Right Sidebar)-show打开，用github&#x2F;google登录即可</p>
-<hr>
-<p>破案了，直接vscode+jupyter+copilot完事</p>
-]]></content>
-      <tags>
-        <tag>Jupyter notebook</tag>
       </tags>
   </entry>
 </search>
