@@ -1,0 +1,26 @@
+# Third-party notices
+
+This directory contains unmodified runtime files from the following npm
+packages so the blog can serve its existing Live2D widget locally.
+
+## live2d-widget 3.1.4
+
+- Source: https://github.com/xiazeyu/live2d-widget.js
+- npm package: https://www.npmjs.com/package/live2d-widget/v/3.1.4
+- Included files: `lib/L2Dwidget.min.js` and its runtime chunk
+  `lib/L2Dwidget.0.min.js`
+- Package integrity: `sha512-KseUqwiGZLb1SArr+lDaXl8AjXSFI/x/Z+BbDIyPHwElGAktCvhFYw/SDkrI4LL5bnVuGMLKMg6crMTa23KGDQ==`
+
+The package metadata declares `GPL-2.0`; the published npm archive contains
+the GNU Affero General Public License v3 text. That archive-provided text is
+preserved verbatim as `LICENSE.live2d-widget.txt`.
+
+## live2d-widget-model-z16 1.0.5
+
+- Source: https://github.com/xiazeyu/live2d-widget-models
+- npm package: https://www.npmjs.com/package/live2d-widget-model-z16/v/1.0.5
+- Included files: `assets/`
+- License: GNU General Public License v2
+- Package integrity: `sha512-1CUY6iOWakrJQdShWOJwzYvM0rj0Ok71B5qbKT03/ATPKUYmDLgSIy4QiH9CDZkXSwlQtIEG7CUqqaUzFZTB4w==`
+
+The upstream license text is preserved as `LICENSE.z16.txt`.

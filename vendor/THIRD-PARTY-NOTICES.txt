@@ -1,0 +1,25 @@
+Third-party static assets
+
+@fancyapps/ui 6.1.14
+Source: https://www.npmjs.com/package/@fancyapps/ui/v/6.1.14
+License: see fancybox/LICENSE.txt
+
+@fortawesome/fontawesome-free 7.3.0
+Source: https://www.npmjs.com/package/@fortawesome/fontawesome-free/v/7.3.0
+Licenses: CC-BY-4.0, OFL-1.1, and MIT; see fontawesome/LICENSE.txt
+
+pjax 0.2.8
+Source: https://www.npmjs.com/package/pjax/v/0.2.8
+License: MIT; see PJAX-LICENSE.txt
+
+hexo-butterfly-swiper 1.0.12
+Source: https://github.com/Akilarlxh/hexo-butterfly-swiper
+License declared by package: Apache-2.0
+
+hexo-butterfly-wowjs 1.0.5
+Source: https://github.com/Akilarlxh/hexo-butterfly-wowjs
+License declared by package: Apache-2.0
+
+hexo-butterfly-envelope 1.0.15
+Source: https://github.com/Akilarlxh/hexo-butterfly-envelop
+License declared by package: Apache-2.0
